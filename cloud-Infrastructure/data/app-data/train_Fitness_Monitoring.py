@@ -83,7 +83,7 @@ models.append(('KNN', KNeighborsClassifier()))   #k-nearest neighbors
 models.append(('GNB', GaussianNB()))      	 #Gaussian Naive Bayes
 models.append(('SVC', SVC(gamma="auto"))) 	 #Support Vector Classification
 
-models.append(('MLP', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1))) #multi-layer perceptron (MLP) algorithm
+#models.append(('MLP', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1))) #multi-layer perceptron (MLP) algorithm
 
 
 # evaluate each model in turn

@@ -18,7 +18,7 @@ app = Flask(__name__)
 @app.route('/health', methods=['GET'])
 def health():
     """Return service health"""
-    return 'ok'
+    return 'teste'
 
 
 @app.route('/predict', methods=['POST'])
@@ -32,15 +32,18 @@ def predict():
     try:
         data = []
         model_name = feature_dict[0]['model']
-        model = joblib.load('model/' + model_name + '.dat.gz')
+#        print(model_name)
         data.append(feature_dict[1])
+#        print(data)
+        model = joblib.load('model/' + model_name + '.dat.gz')
+
         response = get_model_response(data, model)
     except ValueError as e:
         return {'error': str(e).split('\n')[-1].strip()}, 500
 
     return response, 200
 
-@app.route('/testingg', methods=['GET'])
+@app.route('/test', methods=['GET'])
 def test():
     try:
         data = []
