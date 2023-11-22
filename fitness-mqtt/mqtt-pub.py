@@ -1,5 +1,27 @@
 import paho.mqtt.client as mqtt 
 import time
+import pandas as pd
+
+def readCSV():
+    fitness_data = pd.read_csv('data/Fitness_online.csv', sep=';')
+
+    model = "fitness-LDA"
+
+    data_list = []
+
+    for index, row in fitness_data.iterrows():
+        data_dict = {
+            "acceleration_x": row['acceleration_x'],
+            "acceleration_y": row['acceleration_y'],
+            "acceleration_z": row['acceleration_z'],
+            "gyro_x": row['gyro_x'],
+            "gyro_y": row['gyro_y'],
+            "gyro_z": row['gyro_z']
+        }
+        data_list.append([{"model": model}, data_dict])
+
+    return [pd.Series(data).to_json(orient='records') for data in data_list]  
+
 
 broker_hostname = "localhost"
 port = 1883 
@@ -17,16 +39,10 @@ client.on_connect=on_connect
 client.connect(broker_hostname, port)
 client.loop_start()
 
-topic = "idc/iris"
+topic = "idc/fitness"
 msg_count = 0
 
-msg = []
-msg.append('[{"model":"iris-KNN"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
-msg.append('[{"model":"iris-GNB"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
-msg.append('[{"model":"iris-SVC"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
-msg.append('[{"model":"iris-DT"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
-msg.append('[{"model":"iris-LR"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
-msg.append('[{"model":"iris-LDA"},{"SepalLengthCm":5.9,"SepalWidthCm":3,"PetalLengthCm":5.1,"PetalWidthCm":1}]')
+msg = readCSV()
 
 try:
     while msg_count < len(msg):

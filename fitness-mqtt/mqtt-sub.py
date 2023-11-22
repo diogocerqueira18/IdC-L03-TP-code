@@ -4,7 +4,7 @@ import time
 def on_connect(client, userdata, flags, return_code):
     if return_code == 0:
         print("connected")
-        client.subscribe("idc/iris")
+        client.subscribe("idc/fitness")
     else:
         print("could not connect, return code:", return_code)
 
