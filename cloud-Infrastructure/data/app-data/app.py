@@ -1,67 +1,55 @@
-# Local imports
-import datetime
+import paho.mqtt.client as mqtt
+import mysql.connector
 
-# Third part imports
-from flask import Flask
-from flask import request
-import pandas as pd
-import joblib
-import gzip
-import json
+# Configurações de conexão com o banco de dados
+db_config = {
+    'host': 'db',  # Nome do serviço MySQL conforme definido no docker-compose.yml
+    'user': 'root',
+    'password': 'root',
+    'database': 'dbIOT'
+}
 
-from modules.functions import get_model_response
+def connect_to_db():
+    return mysql.connector.connect(**db_config)
 
-
-app = Flask(__name__)
-
-
-@app.route('/health', methods=['GET'])
-def health():
-    """Return service health"""
-    return 'teste'
-
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    feature_dict = request.get_json()
-    if not feature_dict:
-        return {
-            'error': 'Body is empty.'
-        }, 500
-
+def insert_data_into_db(data):
     try:
-        data = []
-        model_name = feature_dict[0]['model']
-#        print(model_name)
-        data.append(feature_dict[1])
-#        print(data)
-        model = joblib.load('model/' + model_name + '.dat.gz')
+        connection = connect_to_db()
+        cursor = connection.cursor()
 
-        response = get_model_response(data, model)
-    except ValueError as e:
-        return {'error': str(e).split('\n')[-1].strip()}, 500
+        # Exemplo de inserção de dados na tabela 'nome_da_tabela'
+        query = "INSERT INTO nome_da_tabela (campo1, campo2, campo3) VALUES (%s, %s, %s)"
+        cursor.execute(query, (data['campo1'], data['campo2'], data['campo3']))
 
-    return response, 200
+        connection.commit()
+        cursor.close()
+        connection.close()
+    except mysql.connector.Error as err:
+        print("Erro ao inserir dados no banco de dados:", err)
 
-@app.route('/test', methods=['GET'])
-def test():
-    try:
-        data = []
-        data_dict = {
-            "acceleration_x": 0.265,
-            "acceleration_y": -0.7814,
-            "acceleration_z": -0.0076,
-            "gyro_x": -0.059,
-            "gyro_y": 0.0325,
-            "gyro_z": -2.9296
-        }
-        data.append(data_dict)
-        model = joblib.load('model/fitness-LDA.dat.gz')
-        response = get_model_response(data, model)
-    except ValueError as e:
-        return {'error': str(e).split('\n')[-1].strip()}, 500
-    
-    return response, 200
+def on_connect(client, userdata, flags, return_code):
+    if return_code == 0:
+        print("Conectado ao MQTT Broker")
+        client.subscribe("idc/fitness")
+    else:
+        print("Não foi possível conectar, código de retorno:", return_code)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+def on_message(client, userdata, message):
+    received_data = str(message.payload.decode("utf-8"))
+    print("Dados recebidos:", received_data)
+
+    # Supondo que você tem os dados em formato JSON, você pode converter para dicionário
+    data_dict = json.loads(received_data)
+
+    # Função para inserir dados no banco de dados
+    insert_data_into_db(data_dict)
+
+broker_hostname = "localhost"
+port = 1883
+
+client = mqtt.Client("Client2")
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect(broker_hostname, port)
+client.loop_forever()

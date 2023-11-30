@@ -217,3 +217,31 @@
 1700649614: New client connected from 172.100.10.15:37186 as nodered_7f0f6cc99fd0329f (p2, c1, k60).
 1700649634: Client Client1 closed its connection.
 1700650923: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701309198: mosquitto version 2.0.18 starting
+1701309198: Config loaded from /mosquitto/config/mosquitto.conf.
+1701309198: Opening ipv4 listen socket on port 1883.
+1701309198: mosquitto version 2.0.18 running
+1701309210: New connection from 172.100.10.15:57138 on port 1883.
+1701309210: New client connected from 172.100.10.15:57138 as nodered_736e6dbac5f846de (p2, c1, k60).
+1701310998: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701312799: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701338004: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701339805: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701341606: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701343407: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701345208: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701347009: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701348730: mosquitto version 2.0.18 terminating
+1701348730: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701348863: mosquitto version 2.0.18 starting
+1701348863: Config loaded from /mosquitto/config/mosquitto.conf.
+1701348863: Opening ipv4 listen socket on port 1883.
+1701348863: mosquitto version 2.0.18 running
+1701348877: New connection from 172.100.10.15:58398 on port 1883.
+1701348877: New client connected from 172.100.10.15:58398 as nodered_449c669f4e03791a (p2, c1, k60).
+1701350664: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701352465: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701358445: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701360285: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701362086: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701363887: Saving in-memory database to /mosquitto/data//mosquitto.db.

@@ -47,7 +47,7 @@ msg = readCSV()
 try:
     while msg_count < len(msg):
         time.sleep(1)
-        result = client.publish(topic, msg[msg_count])
+        result = client.publish(topic,  msg[msg_count, time])
         status = result[0]
         if status == 0:
             print("Message "+ str(msg[msg_count]) + " is published to topic " + topic)
