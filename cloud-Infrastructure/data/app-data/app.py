@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
-import mysql.connector
+import joblib
+import mysql.connector 
+from modules.functions import get_model_response
 
 app = Flask(__name__)
 
@@ -33,8 +35,12 @@ def predict():
     return response, 200
 
 @app.route('/insert', methods=['POST'])
-def insert_data_into_db(data):
+def insert_data_into_db():
     try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
@@ -44,10 +50,12 @@ def insert_data_into_db(data):
         connection.commit()
         cursor.close()
         connection.close()
-        print("Dados inseridos na base de dados com sucesso!")
-    except mysql.connector.Error as err:
-        print("Erro ao inserir dados na base de dados:", err)
 
+        return {'message': 'Data inserted successfully'}, 201
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+    
 @app.route('/activities', methods=['GET'])
 def get_activities():
     try:
@@ -109,10 +117,13 @@ def get_user(user_id):
 @app.route('/users', methods=['POST'])
 def create_user():
     try:
-        connection =  mysql.connector.connect(**db_config)
+        user_data = request.get_json()
+        if not user_data:
+            return {'error': 'Body is empty.'}, 400
+
+        connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        user_data = request.get_json()
         query = "INSERT INTO Users (UserName, Age, Gender, Weight, Height, Goal) VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (user_data['UserName'], user_data['Age'], user_data['Gender'],
                                user_data['Weight'], user_data['Height'], user_data['Goal']))
@@ -121,9 +132,9 @@ def create_user():
         cursor.close()
         connection.close()
 
-        return jsonify({'message': 'User created successfully'}), 201
+        return {'message': 'User created successfully'}, 201
     except mysql.connector.Error as err:
-        return jsonify({'error': str(err)}), 500
+        return {'error': str(err)}, 500
 
 @app.route('/velocity', methods=['GET'])
 def get_velocity():
