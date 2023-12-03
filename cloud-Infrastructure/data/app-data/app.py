@@ -4,28 +4,36 @@ import mysql.connector
 # Configurações de conexão com o banco de dados
 db_config = {
     'host': 'db',  # Nome do serviço MySQL conforme definido no docker-compose.yml
-    'user': 'root',
+    'user': 'admin',
     'password': 'root',
     'database': 'dbIOT'
 }
 
-def connect_to_db():
-    return mysql.connector.connect(**db_config)
+import paho.mqtt.client as mqtt
+import mysql.connector
+import json
+
+db_config = {
+    'host': 'db',  
+    'user': 'admin',
+    'password': 'root',
+    'database': 'dbIOT'
+}
 
 def insert_data_into_db(data):
     try:
-        connection = connect_to_db()
+        connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        # Exemplo de inserção de dados na tabela 'nome_da_tabela'
-        query = "INSERT INTO nome_da_tabela (campo1, campo2, campo3) VALUES (%s, %s, %s)"
-        cursor.execute(query, (data['campo1'], data['campo2'], data['campo3']))
+        query = "INSERT INTO Activities (Date, ActivityType, Distance, Duration, CaloriesBurned) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(query, (data['Date'], data['ActivityType'], data['Distance'], data['Duration'], data['CaloriesBurned']))
 
         connection.commit()
         cursor.close()
         connection.close()
+        print("Dados inseridos na base de dados com sucesso!")
     except mysql.connector.Error as err:
-        print("Erro ao inserir dados no banco de dados:", err)
+        print("Erro ao inserir dados na base de dados:", err)
 
 def on_connect(client, userdata, flags, return_code):
     if return_code == 0:
@@ -37,17 +45,13 @@ def on_connect(client, userdata, flags, return_code):
 def on_message(client, userdata, message):
     received_data = str(message.payload.decode("utf-8"))
     print("Dados recebidos:", received_data)
-
-    # Supondo que você tem os dados em formato JSON, você pode converter para dicionário
     data_dict = json.loads(received_data)
-
-    # Função para inserir dados no banco de dados
     insert_data_into_db(data_dict)
 
 broker_hostname = "localhost"
 port = 1883
 
-client = mqtt.Client("Client2")
+client = mqtt.Client("Client1")
 client.on_connect = on_connect
 client.on_message = on_message
 
