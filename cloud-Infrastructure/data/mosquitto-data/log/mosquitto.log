@@ -294,3 +294,25 @@
 1701628771: Client nodered_1e41f1c4ada96c93 disconnected.
 1701628771: New connection from 172.100.10.15:34384 on port 1883.
 1701628771: New client connected from 172.100.10.15:34384 as nodered_afd55052a46ad8ac (p2, c1, k60).
+1701630180: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701630699: Client nodered_afd55052a46ad8ac disconnected.
+1701630699: New connection from 172.100.10.15:34614 on port 1883.
+1701630699: New client connected from 172.100.10.15:34614 as nodered_ccf82974ab2c9ccd (p2, c1, k60).
+1701631274: Client nodered_ccf82974ab2c9ccd disconnected.
+1701631274: mosquitto version 2.0.18 terminating
+1701631274: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701631281: mosquitto version 2.0.18 starting
+1701631281: Config loaded from /mosquitto/config/mosquitto.conf.
+1701631281: Opening ipv4 listen socket on port 1883.
+1701631281: mosquitto version 2.0.18 running
+1701631291: New connection from 172.100.10.15:34752 on port 1883.
+1701631291: New client connected from 172.100.10.15:34752 as nodered_dcfc2a11b07c7976 (p2, c1, k60).
+1701631851: Client nodered_dcfc2a11b07c7976 disconnected.
+1701631851: mosquitto version 2.0.18 terminating
+1701631851: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1701631861: mosquitto version 2.0.18 starting
+1701631861: Config loaded from /mosquitto/config/mosquitto.conf.
+1701631861: Opening ipv4 listen socket on port 1883.
+1701631861: mosquitto version 2.0.18 running
+1701631868: New connection from 172.100.10.15:34814 on port 1883.
+1701631868: New client connected from 172.100.10.15:34814 as nodered_848ae209c337929f (p2, c1, k60).

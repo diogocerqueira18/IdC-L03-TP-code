@@ -11,8 +11,6 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier # neural network
-from keras.models import Sequential 
-from keras.layers import Dense,Activation,Dropout 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -54,9 +52,6 @@ print("the dimension:", fitness_data.shape)
 
 # class distribution
 print(fitness_data.groupby('activity').size())
-
-
-
 
 
 # we will split data to 80% training data and 20% testing data with random seed of 10
