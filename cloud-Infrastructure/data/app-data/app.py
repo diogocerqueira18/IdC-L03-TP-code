@@ -6,7 +6,8 @@ from modules.functions import get_model_response
 app = Flask(__name__)
 
 db_config = {
-    'host': 'db',  
+    'host': 'db', 
+    'port': 3307, 
     'user': 'admin',
     'password': 'root',
     'database': 'dbIOT'
@@ -139,22 +140,23 @@ def create_user():
 @app.route('/velocity', methods=['GET'])
 def get_velocity():
     try:
-        age = int(request.args.get('age'))
-        gender = request.args.get('gender')
-        gender_value = 1 if gender.lower() == 'female' else 0
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
 
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
         query = "SELECT Velocity FROM Velocities WHERE Range_start <= %s AND Range_finished >= %s AND Genre = %s"
-        cursor.execute(query, (age, age, gender_value))
+        cursor.execute(query, (data['Age'], data['Age'], data['Gender']))
         velocity = cursor.fetchone()
 
         cursor.close()
         connection.close()
 
         if velocity:
-            return jsonify({'velocity': float(velocity[0])}), 200
+            #return jsonify({'velocity': float(velocity[0])}), 200
+            return jsonify(velocity, 200)
         else:
             return jsonify({'error': 'Velocity not found for the given parameters'}), 404
 

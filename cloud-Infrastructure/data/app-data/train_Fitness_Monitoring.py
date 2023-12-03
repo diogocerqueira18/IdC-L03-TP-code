@@ -17,8 +17,6 @@ from sklearn.metrics import confusion_matrix
 import joblib
 import gzip
 
-
-
 # my personal reusable function for detecting missing data
 def missing_value_describe(data):
     # check missing values in training data
@@ -32,11 +30,6 @@ def missing_value_describe(data):
         print(missing_value_stats)
     else:
         print("No misisng data!!!")
-
-
-
-
-
 
 # load the fitness training dataset
 fitness_data = pd.read_csv('data/Fitness_training.csv', sep=';')
@@ -53,7 +46,6 @@ print("the dimension:", fitness_data.shape)
 # class distribution
 print(fitness_data.groupby('activity').size())
 
-
 # we will split data to 80% training data and 20% testing data with random seed of 10
 X = fitness_data.drop(['activity'], axis=1)
 Y = fitness_data['activity']
@@ -63,7 +55,6 @@ print("X_train.shape:", X_train.shape)
 print("X_test.shape:", X_test.shape)
 print("Y_train.shape:", X_train.shape)
 print("Y_test.shape:", Y_test.shape)
-
 
 # models
 models = []
@@ -79,7 +70,6 @@ models.append(('GNB', GaussianNB()))      	 #Gaussian Naive Bayes
 models.append(('SVC', SVC(gamma="auto"))) 	 #Support Vector Classification
 
 #models.append(('MLP', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1))) #multi-layer perceptron (MLP) algorithm
-
 
 # evaluate each model in turn
 print("Model Accuracy:")
@@ -113,8 +103,6 @@ def test_model(name, model):
     print(confusion_matrix(Y_test, predictions))
     print("Classification Report:")
     print(classification_report(Y_test, predictions))
-    
-    
 
 # predict values with our test set
 for name, model in models:
