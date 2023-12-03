@@ -10,6 +10,28 @@ db_config = {
     'database': 'dbIOT'
 }
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    feature_dict = request.get_json()
+    if not feature_dict:
+        return {
+            'error': 'Body is empty.'
+        }, 500
+
+    try:
+        data = []
+        model_name = feature_dict[0]['model']
+#        print(model_name)
+        data.append(feature_dict[1])
+#        print(data)
+        model = joblib.load('model/' + model_name + '.dat.gz')
+
+        response = get_model_response(data, model)
+    except ValueError as e:
+        return {'error': str(e).split('\n')[-1].strip()}, 500
+
+    return response, 200
+
 @app.route('/insert', methods=['POST'])
 def insert_data_into_db(data):
     try:

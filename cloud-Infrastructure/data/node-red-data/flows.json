@@ -455,8 +455,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 140,
-        "y": 140,
+        "x": 220,
+        "y": 160,
         "wires": [
             [
                 "f2a03e5d9015a12d"
@@ -479,11 +479,11 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 380,
-        "y": 200,
+        "x": 480,
+        "y": 320,
         "wires": [
             [
-                "40079fdeb82ef06e"
+                "f2a03e5d9015a12d"
             ]
         ]
     },
@@ -499,71 +499,37 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
+        "x": 580,
         "y": 160,
         "wires": []
     },
     {
-        "id": "40079fdeb82ef06e",
-        "type": "ui_chart",
+        "id": "c13fb3dc0e6f31ba",
+        "type": "inject",
         "z": "3e315f997a180917",
-        "name": "",
-        "group": "72f114b81c497b2b",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "label": "chart",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
+        "name": "Fitness-LDA",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
         ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 610,
-        "y": 300,
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"model\":\"fitness-LDA\"},{\"acceleration_x\":0.265,\"acceleration_y\":-0.7814,\"acceleration_z\":-0.0076,\"gyro_x\":-0.059,\"gyro_y\":0.0325,\"gyro_z\":-2.9296}]",
+        "payloadType": "json",
+        "x": 190,
+        "y": 320,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a65f11c4e2a1d3a5",
-        "type": "create dataset",
-        "z": "3e315f997a180917",
-        "name": "",
-        "path": "",
-        "saveFolder": "",
-        "saveName": "",
-        "input": "",
-        "output": "",
-        "trainingPartition": "",
-        "shuffle": "",
-        "seed": "",
-        "x": 420,
-        "y": 80,
-        "wires": [
-            []
+            [
+                "4e4532788782c67a"
+            ]
         ]
     }
 ]
