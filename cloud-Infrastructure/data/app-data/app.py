@@ -1,20 +1,20 @@
 import paho.mqtt.client as mqtt
 import mysql.connector
+import json
+
+average_velocities = {
+    "20 to 29": {"Male": 1.36, "Female": 1.34},
+    "30 to 39": {"Male": 1.43, "Female": 1.34},
+    "40 to 49": {"Male": 1.43, "Female": 1.39},
+    "50 to 59": {"Male": 1.43, "Female": 1.31},
+    "60 to 69": {"Male": 1.34, "Female": 1.24},
+    "70 to 79": {"Male": 1.26, "Female": 1.13},
+    "80 to 89": {"Male": 0.97, "Female": 0.94}
+}
 
 # Configurações de conexão com o banco de dados
 db_config = {
     'host': 'db',  # Nome do serviço MySQL conforme definido no docker-compose.yml
-    'user': 'admin',
-    'password': 'root',
-    'database': 'dbIOT'
-}
-
-import paho.mqtt.client as mqtt
-import mysql.connector
-import json
-
-db_config = {
-    'host': 'db',  
     'user': 'admin',
     'password': 'root',
     'database': 'dbIOT'
