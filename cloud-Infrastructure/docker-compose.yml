@@ -49,7 +49,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: root
     volumes:
-     - dbdata:/var/lib/mysql
+     - ./data/db-data:/var/lib/mysql
 
 networks:
   idc-net:
@@ -58,6 +58,3 @@ networks:
       driver: default
       config:
         - subnet: 172.100.10.0/24
-        
-volumes:
-  dbdata:
