@@ -6,9 +6,8 @@ from modules.functions import get_model_response
 app = Flask(__name__)
 
 db_config = {
-    'host': 'db', 
-    'port': 3307, 
-    'user': 'admin',
+    'host': 'localhost',  
+    'user': 'root',
     'password': 'root',
     'database': 'dbIOT'
 }
