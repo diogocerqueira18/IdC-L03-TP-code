@@ -12,6 +12,33 @@ db_config = {
     'database': 'dbIOT'
 }
 
+@app.route('/velocity', methods=['GET'])
+def get_velocity():
+    try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "SELECT Velocity FROM Velocities WHERE Range_start <= %s AND Range_finished >= %s AND Genre = %s"
+        cursor.execute(query, (data['Age'], data['Age'], data['Gender']))
+        velocity = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
+        if velocity:
+            #return jsonify({'velocity': float(velocity[0])}), 200
+            return jsonify(velocity, 200)
+        else:
+            return jsonify({'error': 'Velocity not found for the given parameters'}), 404
+
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    
+
 @app.route('/predict', methods=['POST'])
 def predict():
     feature_dict = request.get_json()
@@ -136,31 +163,5 @@ def create_user():
     except mysql.connector.Error as err:
         return {'error': str(err)}, 500
 
-@app.route('/velocity', methods=['GET'])
-def get_velocity():
-    try:
-        data = request.get_json()
-        if not data:
-            return {'error': 'Body is empty.'}, 400
-
-        connection = mysql.connector.connect(**db_config)
-        cursor = connection.cursor()
-
-        query = "SELECT Velocity FROM Velocities WHERE Range_start <= %s AND Range_finished >= %s AND Genre = %s"
-        cursor.execute(query, (data['Age'], data['Age'], data['Gender']))
-        velocity = cursor.fetchone()
-
-        cursor.close()
-        connection.close()
-
-        if velocity:
-            #return jsonify({'velocity': float(velocity[0])}), 200
-            return jsonify(velocity, 200)
-        else:
-            return jsonify({'error': 'Velocity not found for the given parameters'}), 404
-
-    except mysql.connector.Error as err:
-        return jsonify({'error': str(err)}), 500
-    
 if __name__ == '__main__':
     app.run(debug=True)
