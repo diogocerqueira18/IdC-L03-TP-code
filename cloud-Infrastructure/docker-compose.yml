@@ -6,6 +6,8 @@ services:
     container_name: node-red
     environment:
       - TZ=Europe/Portugal
+    ports:
+      - 1880:1880
     networks:
       - idc-net
     volumes:
@@ -29,7 +31,7 @@ services:
     build: ./data/app-data/
     container_name: app
     ports:
-      - "8000:8000"
+      - 8000:8000
     networks:
       - idc-net
     depends_on:
@@ -43,6 +45,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
+    ports:
+      - 3306:3306
     volumes:
       - ./data/db-data:/var/lib/mysql
     networks:
