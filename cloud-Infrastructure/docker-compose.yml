@@ -37,6 +37,7 @@ services:
     networks:
       idc-net:
         ipv4_address: 172.100.10.14
+
   db:
     platform: linux/x86_64
     image: mysql:5.7
