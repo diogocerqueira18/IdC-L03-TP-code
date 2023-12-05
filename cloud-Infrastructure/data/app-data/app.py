@@ -6,7 +6,7 @@ from modules.functions import get_model_response
 app = Flask(__name__)
 
 db_config = {
-    'host': 'localhost',  
+    'host': 'db',  
     'user': 'root',
     'password': 'root',
     'database': 'dbIOT'
@@ -30,8 +30,7 @@ def get_velocity():
         connection.close()
 
         if velocity:
-            #return jsonify({'velocity': float(velocity[0])}), 200
-            return jsonify(velocity, 200)
+            return jsonify({'velocity': float(velocity[0])}), 200
         else:
             return jsonify({'error': 'Velocity not found for the given parameters'}), 404
 

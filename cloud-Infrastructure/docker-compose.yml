@@ -6,11 +6,8 @@ services:
     container_name: node-red
     environment:
       - TZ=Europe/Portugal
-    ports:
-      - 1880:1880
     networks:
-      idc-net:
-        ipv4_address: 172.100.10.15
+      - idc-net
     volumes:
       - ./data/node-red-data:/data
 
@@ -26,8 +23,7 @@ services:
       - ./data/mosquitto-data/data:/mosquitto/data
       - ./data/mosquitto-data/log:/mosquitto/log
     networks:
-      idc-net:
-        ipv4_address: 172.100.10.10
+      - idc-net
 
   web:
     build: ./data/app-data/
@@ -35,22 +31,22 @@ services:
     ports:
       - "8000:8000"
     networks:
-      idc-net:
-        ipv4_address: 172.100.10.14
+      - idc-net
+    depends_on:
+      - db
 
   db:
     platform: linux/x86_64
     image: mysql:5.7
     container_name: db
-    ports:
-      - "3306:3306"
     environment:
-      MYSQL_DATABASE: dbIOT
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     volumes:
-     - ./data/db-data:/var/lib/mysql
+      - ./data/db-data:/var/lib/mysql
+    networks:
+      - idc-net
 
 networks:
   idc-net:
