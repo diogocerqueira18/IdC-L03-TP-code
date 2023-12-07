@@ -162,5 +162,62 @@ def create_user():
     except mysql.connector.Error as err:
         return {'error': str(err)}, 500
 
+@app.route('/data', methods=['POST'])
+def add_sensor_data():
+    try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+        
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "INSERT INTO DadosSensores (DataHora, Atividade, AceleracaoX, AceleracaoY, AceleracaoZ, GiroX, GiroY, GiroZ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (
+            data['DataHora'], data['Atividade'], data['AceleracaoX'], data['AceleracaoY'],
+            data['AceleracaoZ'], data['GiroX'], data['GiroY'], data['GiroZ']
+        ))
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        return {'message': 'Sensor data added successfully'}, 201
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+    
+@app.route('/datahistoric', methods=['GET'])
+def get_sensor_data():
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM DadosSensores"
+        cursor.execute(query)
+        data = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+
+        sensor_data_list = []
+        for row in data:
+            sensor_data = {
+                'DataHora': row[0].strftime("%Y-%m-%d %H:%M:%S"),
+                'Atividade': int(row[1]),
+                'AceleracaoX': float(row[2]),
+                'AceleracaoY': float(row[3]),
+                'AceleracaoZ': float(row[4]),
+                'GiroX': float(row[5]),
+                'GiroY': float(row[6]),
+                'GiroZ': float(row[7])
+            }
+            sensor_data_list.append(sensor_data)
+
+        return sensor_data_list, 200
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+
 if __name__ == '__main__':
     app.run(debug=True)
