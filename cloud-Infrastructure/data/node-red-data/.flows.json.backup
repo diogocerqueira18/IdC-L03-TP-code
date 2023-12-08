@@ -15,14 +15,6 @@
         "env": []
     },
     {
-        "id": "a012a58c042fd2a9",
-        "type": "tab",
-        "label": "Flow 3",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "031fa5fc0fd5aafd",
         "type": "tab",
         "label": "Flow 4",
@@ -34,6 +26,14 @@
         "id": "a4bf4391a43c73d8",
         "type": "tab",
         "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1335b47e13b426e5",
+        "type": "tab",
+        "label": "Flow 3",
         "disabled": false,
         "info": "",
         "env": []
@@ -615,33 +615,6 @@
         ]
     },
     {
-        "id": "a7149a4f0d1c14c7",
-        "type": "inject",
-        "z": "a012a58c042fd2a9",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "e91f5b016bc30f01",
         "type": "inject",
         "z": "031fa5fc0fd5aafd",
@@ -834,7 +807,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
+        "x": 980,
         "y": 80,
         "wires": []
     },
@@ -843,7 +816,7 @@
         "type": "function",
         "z": "a4bf4391a43c73d8",
         "name": "ProcessData",
-        "func": "function processActivity(activityData) {\n\n  const date = activityData.col1;\n  const time = activityData.col2;\n  const activity = parseInt(activityData.col3);\n  const acceleration_x = activityData.col4 ? parseFloat(activityData.col4) : null;\n  const acceleration_y = activityData.col5 ? parseFloat(activityData.col5) : null;\n  const acceleration_z = activityData.col6 ? parseFloat(activityData.col6) : null;\n  const gyro_x = activityData.col7 ? parseFloat(activityData.col7) : null;\n  const gyro_y = activityData.col8 ? parseFloat(activityData.col8) : null;\n  const gyro_z = activityData.col9 ? parseFloat(activityData.col9) : null;\n\n  node.warn(`Incoming data: date=${date}, time=${time}, activity=${activity}`);\n  node.warn(`Current state: lastDate=${context.get('lastDate')}, lastTime=${context.get('lastTime')}, lastActivity=${context.get('lastActivity')}`);\n\n  // Use context variable for currentActivity array\n  let currentActivity = context.get('currentActivity') || [];\n\n  if (context.get('lastDate') === undefined || context.get('lastTime') === undefined || context.get('lastActivity') === undefined) {\n      context.set('lastDate', date);\n      context.set('lastTime', time);\n      context.set('lastActivity', activity);\n  } else {  \n      const timeDifference = getTimeDifference(context.get('lastTime'), time);\n      const dateDifference = getDateDifference(context.get('lastDate'), date);\n      node.warn('timediff:' + timeDifference + ' ' + 'datedif:' + dateDifference);\n      if (timeDifference > 1000 || dateDifference !== 0 || context.get('lastActivity') !== activity) {\n          if (currentActivity.length > 0) {\n              node.send({ payload: currentActivity });\n              currentActivity = [];\n              node.warn(\"Data sent and currentActivity array reset.\");\n          }\n      }else {\n        currentActivity.push({\n            date,\n            time,\n            activity,\n            acceleration_x,\n            acceleration_y,\n            acceleration_z,\n            gyro_x,\n            gyro_y,\n            gyro_z\n        });\n\n        context.set('lastDate', date);\n        context.set('lastTime', time);\n        context.set('lastActivity', activity);\n        node.warn('Group Data:' + context.get('lastDate') + 'time:' + context.get('lastTime'));\n      }\n  }\n\n  // Update context variable\n  context.set('currentActivity', currentActivity);\n}\n\nconst csvData = msg.payload;\nprocessActivity(csvData);\n\nfunction getTimeDifference(time1, time2) {\n  const timeParts1 = time1.split(':').map(Number);\n  const timeParts2 = time2.split(':').map(Number);\n\n  const date1 = new Date(2023, 6, 1, timeParts1[0], timeParts1[1], timeParts1[2]).getTime();\n  const date2 = new Date(2023, 6, 1, timeParts2[0], timeParts2[1], timeParts2[2]).getTime();\n\n  return Math.abs(date2 - date1);\n}\n\n\nfunction getDateDifference(date1, date2) {\n  node.warn(date1 + \"-\" + date2);\n  const dateParts1 = date1.split('/').map(Number);\n  const dateParts2 = date2.split('/').map(Number);\n\n  const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);\n  const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);\n\n  const difference = Math.abs(d2.getTime() - d1.getTime());\n  const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));\n\n  return differenceInDays;\n}",
+        "func": "function processActivity(activityData) {\n\n  const date = activityData.col1;\n  const time = activityData.col2;\n  const activity = parseInt(activityData.col3);\n  const acceleration_x = activityData.col4 ? parseFloat(activityData.col4) : null;\n  const acceleration_y = activityData.col5 ? parseFloat(activityData.col5) : null;\n  const acceleration_z = activityData.col6 ? parseFloat(activityData.col6) : null;\n  const gyro_x = activityData.col7 ? parseFloat(activityData.col7) : null;\n  const gyro_y = activityData.col8 ? parseFloat(activityData.col8) : null;\n  const gyro_z = activityData.col9 ? parseFloat(activityData.col9) : null;\n\n  node.warn(`Incoming data: date=${date}, time=${time}, activity=${activity}`);\n  node.warn(`Current state: lastDate=${context.get('lastDate')}, lastTime=${context.get('lastTime')}, lastActivity=${context.get('lastActivity')}`);\n\n  // Use context variable for currentActivity array\n  let currentActivity = context.get('currentActivity') || [];\n\n  if (context.get('lastDate') === undefined || context.get('lastTime') === undefined || context.get('lastActivity') === undefined) {\n      context.set('lastDate', date);\n      context.set('lastTime', time);\n      context.set('lastActivity', activity);\n  } else {  \n      const timeDifference = getTimeDifference(context.get('lastTime'), time);\n      const dateDifference = getDateDifference(context.get('lastDate'), date);\n      node.warn('timediff:' + timeDifference + ' ' + 'datedif:' + dateDifference);\n      if (timeDifference > 1000 || dateDifference !== 0 || context.get('lastActivity') !== activity) {\n          if (currentActivity.length > 0) {\n              node.send({ payload: currentActivity });\n              currentActivity = [];\n              node.warn(\"Data sent and currentActivity array reset.\");\n          }\n      }\n\n      currentActivity.push({\n          date,\n          time,\n          activity,\n          acceleration_x,\n          acceleration_y,\n          acceleration_z,\n          gyro_x,\n          gyro_y,\n          gyro_z\n      });\n\n      context.set('lastDate', date);\n      context.set('lastTime', time);\n      context.set('lastActivity', activity);\n      node.warn('Group Data:' + context.get('lastDate') + 'time:' + context.get('lastTime'));\n  }\n\n  // Update context variable\n  context.set('currentActivity', currentActivity);\n}\n\nconst csvData = msg.payload;\nprocessActivity(csvData);\n\nfunction getTimeDifference(time1, time2) {\n  const timeParts1 = time1.split(':').map(Number);\n  const timeParts2 = time2.split(':').map(Number);\n\n  const date1 = new Date(2023, 6, 1, timeParts1[0], timeParts1[1], timeParts1[2]).getTime();\n  const date2 = new Date(2023, 6, 1, timeParts2[0], timeParts2[1], timeParts2[2]).getTime();\n\n  return Math.abs(date2 - date1);\n}\n\n\nfunction getDateDifference(date1, date2) {\n  node.warn(date1 + \"-\" + date2);\n  const dateParts1 = date1.split('/').map(Number);\n  const dateParts2 = date2.split('/').map(Number);\n\n  const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);\n  const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);\n\n  const difference = Math.abs(d2.getTime() - d1.getTime());\n  const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));\n\n  return differenceInDays;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -853,8 +826,206 @@
         "x": 690,
         "y": 80,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dbcdbe152209e3f2",
+        "type": "function",
+        "z": "a4bf4391a43c73d8",
+        "name": "function 3",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c05700f69993b789",
+        "type": "mqtt in",
+        "z": "1335b47e13b426e5",
+        "name": "",
+        "topic": "idc/fc15",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "037aecdc6926ce9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 180,
+        "wires": [
             [
-                "fa72d207b25a4bec"
+                "79a60a58a1c9e2f3",
+                "7ab422c25a2ec068"
+            ]
+        ]
+    },
+    {
+        "id": "79a60a58a1c9e2f3",
+        "type": "http request",
+        "z": "1335b47e13b426e5",
+        "name": "Predict Service",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/predict",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 440,
+        "y": 380,
+        "wires": [
+            [
+                "a5da6d92dcb4d7cd"
+            ]
+        ]
+    },
+    {
+        "id": "70e625545514d5cf",
+        "type": "debug",
+        "z": "1335b47e13b426e5",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "aa834b048b8d87d6",
+        "type": "inject",
+        "z": "1335b47e13b426e5",
+        "name": "Fitness-LDA",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"model\":\"fitness-LDA\"},{\"acceleration_x\":0.265,\"acceleration_y\":-0.7814,\"acceleration_z\":-0.0076,\"gyro_x\":-0.059,\"gyro_y\":0.0325,\"gyro_z\":-2.9296,\"time\":\"02:27:14:179624\",\"date\":\"07/12/23\"}]",
+        "payloadType": "json",
+        "x": 190,
+        "y": 340,
+        "wires": [
+            [
+                "79a60a58a1c9e2f3",
+                "7ab422c25a2ec068"
+            ]
+        ]
+    },
+    {
+        "id": "1d9cd091f6fec8e5",
+        "type": "function",
+        "z": "1335b47e13b426e5",
+        "name": "concat",
+        "func": "var accelerationObj = msg.payload[0][1]\nvar prediction = msg.payload[1].prediction\nvar result = {\n    payload: {\n            acceleration_x: accelerationObj.acceleration_x,\n            acceleration_y: accelerationObj.acceleration_y,\n            acceleration_z: accelerationObj.acceleration_z,\n            gyro_x: accelerationObj.gyro_x,\n            gyro_y: accelerationObj.gyro_y,\n            gyro_z: accelerationObj.gyro_z,\n            date: accelerationObj.date,\n            time: accelerationObj.time,\n            activity: prediction\n        },\n}\nreturn result;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "70e625545514d5cf",
+                "8a830131911c9749"
+            ]
+        ]
+    },
+    {
+        "id": "7ab422c25a2ec068",
+        "type": "join",
+        "z": "1335b47e13b426e5",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "1d9cd091f6fec8e5"
+            ]
+        ]
+    },
+    {
+        "id": "a5da6d92dcb4d7cd",
+        "type": "json",
+        "z": "1335b47e13b426e5",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "7ab422c25a2ec068"
+            ]
+        ]
+    },
+    {
+        "id": "8a830131911c9749",
+        "type": "http request",
+        "z": "1335b47e13b426e5",
+        "name": "insertActivity",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/insertActivity",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "70e625545514d5cf"
             ]
         ]
     }

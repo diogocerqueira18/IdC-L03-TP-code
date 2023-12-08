@@ -37,7 +37,6 @@ def get_velocity():
     except mysql.connector.Error as err:
         return jsonify({'error': str(err)}), 500
     
-
 @app.route('/predict', methods=['POST'])
 def predict():
     feature_dict = request.get_json()
@@ -48,9 +47,14 @@ def predict():
 
     try:
         data = []
+        feature_dict[1].pop('time', None)
+        feature_dict[1].pop('date', None)
         model_name = feature_dict[0]['model']
+#        print(model_name)
         data.append(feature_dict[1])
+        print(data)
         model = joblib.load('model/' + model_name + '.dat.gz')
+
         response = get_model_response(data, model)
     except ValueError as e:
         return {'error': str(e).split('\n')[-1].strip()}, 500
