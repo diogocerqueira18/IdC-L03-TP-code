@@ -445,9 +445,7 @@
         "x": 340,
         "y": 740,
         "wires": [
-            [
-                "b5f343a20278eea1"
-            ]
+            []
         ]
     },
     {
@@ -455,7 +453,7 @@
         "type": "mqtt in",
         "z": "3e315f997a180917",
         "name": "",
-        "topic": "idc/fitness",
+        "topic": "idc/fc15",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "037aecdc6926ce9a",
@@ -467,7 +465,7 @@
         "y": 60,
         "wires": [
             [
-                "f2a03e5d9015a12d"
+                "4e4532788782c67a"
             ]
         ]
     },
