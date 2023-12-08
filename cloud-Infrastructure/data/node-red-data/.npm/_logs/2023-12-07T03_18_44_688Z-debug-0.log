@@ -1,0 +1,73 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@8.19.4
+2 info using node@v16.20.2
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 3ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 9ms
+6 timing config:load:builtin Completed in 9ms
+7 warn config production Use `--omit=dev` instead.
+8 timing config:load:cli Completed in 12ms
+9 timing config:load:env Completed in 0ms
+10 timing config:load:file:/data/.npmrc Completed in 1ms
+11 timing config:load:project Completed in 8ms
+12 timing config:load:file:/usr/src/node-red/.npmrc Completed in 0ms
+13 timing config:load:user Completed in 1ms
+14 timing config:load:file:/usr/local/etc/npmrc Completed in 3ms
+15 timing config:load:global Completed in 3ms
+16 timing config:load:validate Completed in 1ms
+17 timing config:load:credentials Completed in 1ms
+18 timing config:load:setEnvs Completed in 2ms
+19 timing config:load Completed in 43ms
+20 timing npm:load:configload Completed in 43ms
+21 timing npm:load:mkdirpcache Completed in 12ms
+22 timing npm:load:mkdirplogs Completed in 20ms
+23 verbose title npm install apconic-string-parser@1.0.2
+24 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--production" "--engine-strict" "apconic-string-parser@1.0.2"
+25 timing npm:load:setTitle Completed in 3ms
+26 timing config:load:flatten Completed in 5ms
+27 timing npm:load:display Completed in 10ms
+28 verbose logfile logs-max:10 dir:/data/.npm/_logs
+29 verbose logfile /data/.npm/_logs/2023-12-07T03_18_44_688Z-debug-0.log
+30 timing npm:load:logFile Completed in 67ms
+31 timing npm:load:timers Completed in 0ms
+32 timing npm:load:configScope Completed in 0ms
+33 timing npm:load Completed in 161ms
+34 timing arborist:ctor Completed in 1ms
+35 silly logfile start cleaning logs, removing 40 files
+36 timing idealTree:init Completed in 163ms
+37 timing idealTree:userRequests Completed in 4ms
+38 silly idealTree buildDeps
+39 silly fetch manifest apconic-string-parser@1.0.2
+40 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+41 silly logfile done cleaning log files
+42 http fetch GET 200 https://registry.npmjs.org/apconic-string-parser 2357ms (cache miss)
+43 silly placeDep ROOT apconic-string-parser@ OK for: node-red-project@0.0.1 want: 1.0.2
+44 timing idealTree:#root Completed in 2374ms
+45 timing idealTree:node_modules/apconic-string-parser Completed in 0ms
+46 timing idealTree:buildDeps Completed in 2380ms
+47 timing idealTree:fixDepFlags Completed in 1ms
+48 timing idealTree Completed in 2556ms
+49 timing command:install Completed in 2576ms
+50 verbose stack TypeError: Cannot convert undefined or null to object
+50 verbose stack     at Function.keys (<anonymous>)
+50 verbose stack     at module.exports (/usr/local/lib/node_modules/npm/node_modules/npm-pick-manifest/lib/index.js:213:22)
+50 verbose stack     at RegistryFetcher.manifest (/usr/local/lib/node_modules/npm/node_modules/pacote/lib/registry.js:125:22)
+50 verbose stack     at async Arborist.[nodeFromEdge] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1061:19)
+50 verbose stack     at async Arborist.[buildDepStep] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:930:11)
+50 verbose stack     at async Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:211:7)
+50 verbose stack     at async Promise.all (index 1)
+50 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:154:5)
+50 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:145:5)
+50 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli.js:78:5)
+51 verbose cwd /data
+52 verbose Linux 5.10.102.1-microsoft-standard-WSL2
+53 verbose node v16.20.2
+54 verbose npm  v8.19.4
+55 error Cannot convert undefined or null to object
+56 verbose exit 1
+57 timing npm Completed in 3000ms
+58 verbose unfinished npm timer reify 1701919125103
+59 verbose unfinished npm timer reify:loadTrees 1701919125115
+60 verbose code 1
+61 error A complete log of this run can be found in:
+61 error     /data/.npm/_logs/2023-12-07T03_18_44_688Z-debug-0.log

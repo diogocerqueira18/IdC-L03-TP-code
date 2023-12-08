@@ -19,13 +19,11 @@ import gzip
 
 # my personal reusable function for detecting missing data
 def missing_value_describe(data):
-    # check missing values in training data
     missing_value_stats = (data.isnull().sum() / len(data)*100)
     missing_value_col_count = sum(missing_value_stats > 0)
     missing_value_stats = missing_value_stats.sort_values(ascending=False)[:missing_value_col_count]
     print("Number of columns with missing values:", missing_value_col_count)
     if missing_value_col_count != 0:
-        # print out column names with missing value percentage
         print("\nMissing percentage (desceding):")
         print(missing_value_stats)
     else:
@@ -69,7 +67,6 @@ models.append(('KNN', KNeighborsClassifier()))   #k-nearest neighbors
 models.append(('GNB', GaussianNB()))      	 #Gaussian Naive Bayes
 models.append(('SVC', SVC(gamma="auto"))) 	 #Support Vector Classification
 
-#models.append(('MLP', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1))) #multi-layer perceptron (MLP) algorithm
 
 # evaluate each model in turn
 print("Model Accuracy:")

@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "3.1.1",
+        "version": "3.1.3",
         "local": false,
         "user": false,
         "nodes": {
@@ -814,6 +814,25 @@
                 "user": false,
                 "module": "node-red-contrib-machine-learning-v2",
                 "file": "/data/node_modules/node-red-contrib-machine-learning-v2/nodes/trainers/one-class-support-vector-classifier/one-class-support-vector-classifier.js"
+            }
+        }
+    },
+    "node-red-contrib-string": {
+        "name": "node-red-contrib-string",
+        "version": "1.0.0",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "string": {
+                "name": "string",
+                "types": [
+                    "string"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-string",
+                "file": "/data/node_modules/node-red-contrib-string/string/string.js"
             }
         }
     }

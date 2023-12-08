@@ -17,7 +17,6 @@ broker_hostname ="localhost"
 port = 1883 
 
 client = mqtt.Client("Client2")
-# client.username_pw_set(username="user_name", password="password") # uncomment if you use password auth
 client.on_connect=on_connect
 client.on_message=on_message
 

@@ -5,6 +5,7 @@
     "private": true,
     "dependencies": {
         "node-red-contrib-machine-learning-v2": "~1.0.9",
+        "node-red-contrib-string": "~1.0.0",
         "node-red-dashboard": "~3.6.0"
     }
 }
