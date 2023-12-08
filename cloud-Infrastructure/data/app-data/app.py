@@ -48,10 +48,12 @@ def predict():
 
     try:
         data = []
+        feature_dict[1].pop('time', None)
+        feature_dict[1].pop('date', None)
         model_name = feature_dict[0]['model']
 #        print(model_name)
         data.append(feature_dict[1])
-#        print(data)
+        print(data)
         model = joblib.load('model/' + model_name + '.dat.gz')
 
         response = get_model_response(data, model)
@@ -215,6 +217,33 @@ def get_sensor_data():
             sensor_data_list.append(sensor_data)
 
         return sensor_data_list, 200
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+
+
+@app.route('/teste', methods=['POST'])
+def teste():
+    try:
+        df = pd.read_csv('Fitness_training.csv', sep=';')
+
+        # Conectar ao banco de dados MySQL
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+
+        # Inserir dados na tabela
+        for _, row in df.iterrows():
+            cursor.execute("""
+                INSERT INTO training 
+                (date, time, activity, acceleration_x, acceleration_y, acceleration_z, gyro_x, gyro_y, gyro_z)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, tuple(row))
+
+        # Commit e fechar conexão
+        conn.commit()
+        conn.close()
+
+        return {'message': 'Data inserted successfully'}, 201
 
     except mysql.connector.Error as err:
         return {'error': str(err)}, 500

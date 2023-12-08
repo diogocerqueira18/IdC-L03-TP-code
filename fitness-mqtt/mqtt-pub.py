@@ -1,6 +1,8 @@
+from datetime import datetime
 import paho.mqtt.client as mqtt 
 import time
 import pandas as pd
+import json
 
 def readCSV():
     fitness_data = pd.read_csv('data/Fitness_online.csv', sep=';')
@@ -16,11 +18,12 @@ def readCSV():
             "acceleration_z": row['acceleration_z'],
             "gyro_x": row['gyro_x'],
             "gyro_y": row['gyro_y'],
-            "gyro_z": row['gyro_z']
+            "gyro_z": row['gyro_z'],
+            "time": "",
+            "date": ""
         }
         data_list.append([{"model": model}, data_dict])
-
-    return [pd.Series(data).to_json(orient='records') for data in data_list]  
+    return data_list 
 
 
 broker_hostname = "localhost"
@@ -39,7 +42,7 @@ client.on_connect=on_connect
 client.connect(broker_hostname, port)
 client.loop_start()
 
-topic = "idc/fitness"
+topic = "idc/fc15"
 msg_count = 0
 
 msg = readCSV()
@@ -47,7 +50,16 @@ msg = readCSV()
 try:
     while msg_count < len(msg):
         time.sleep(1)
-        result = client.publish(topic,  msg[msg_count, time])
+        
+        now = datetime.now()
+
+        date = now.strftime("%d/%m/%y")
+        time_str = now.strftime("%H:%M:%S:%f")
+        msg[msg_count][1]["date"] = date
+        msg[msg_count][1]["time"] = time_str
+
+
+        result = client.publish(topic, json.dumps(msg[msg_count]))
         status = result[0]
         if status == 0:
             print("Message "+ str(msg[msg_count]) + " is published to topic " + topic)
