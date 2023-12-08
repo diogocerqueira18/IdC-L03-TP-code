@@ -23,6 +23,22 @@
         "env": []
     },
     {
+        "id": "031fa5fc0fd5aafd",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a4bf4391a43c73d8",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "037aecdc6926ce9a",
         "type": "mqtt-broker",
         "name": "IdC",
@@ -488,9 +504,7 @@
         "x": 240,
         "y": 140,
         "wires": [
-            [
-                "f2a03e5d9015a12d"
-            ]
+            []
         ]
     },
     {
@@ -498,7 +512,7 @@
         "type": "debug",
         "z": "3e315f997a180917",
         "name": "debug 4",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -506,8 +520,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
-        "y": 60,
+        "x": 620,
+        "y": 320,
         "wires": []
     },
     {
@@ -528,11 +542,11 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "Run python script",
+        "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 90,
-        "y": 480,
+        "x": 110,
+        "y": 320,
         "wires": [
             [
                 "9ffe8dafcd435f28"
@@ -544,15 +558,15 @@
         "type": "function",
         "z": "3e315f997a180917",
         "name": "function 1",
-        "func": "const rows = msg.payload; \nconst activities = [];\nlet currentActivity = [];\n\nfor (let i = 1; i < rows.length; i++) { // Começa do índice 1 para ignorar o cabeçalho\n    const columns = rows[i].split(';'); // Separando colunas\n    const date = columns[0]; // Considerando a coluna de data\n    const time = columns[1]; // Considerando a coluna de tempo\n    const activity = columns[2]; // Considerando a coluna de tipo de atividade\n\n\n    currentActivity.push({\n        date: date,\n        time: time,\n        acceleration_x: parseFloat(columns[3]),\n        acceleration_y: parseFloat(columns[4]),\n        acceleration_z: parseFloat(columns[5]),\n        gyro_x: parseFloat(columns[6]),\n        gyro_y: parseFloat(columns[7]),\n        gyro_z: parseFloat(columns[8])\n    });\n}\n\nnode.send({ payload: activities });\n\n\n// Lendo o arquivo\nfs.readFile(filePath, 'utf8', (err, data) => {\n    if (err) {\n        node.error(err);\n    } else {\n        const rows = data.split('\\n'); // Separando linhas do CSV\n        const activities = [];\n       let currentActivity = [];\n\n        //  Iterando sobre as linhas do CSV\n        for (let i = 1; i < rows.length; i++) { // Começa do índice 1 para ignorar o cabeçalho\n            const columns = rows[i].split(';'); // Separando colunas\n            const date = columns[0]; // Considerando a coluna de data\n            const time = columns[1]; // Considerando a coluna de tempo\n            const activity = columns[2]; // Considerando a coluna de tipo de atividade\n\n            // Verificando a diferença de tempo, data ou tipo de atividade\n            if (i > 1) {\n                const previousColumns = rows[i - 1].split(';');\n                const previousDate = previousColumns[0];\n                const previousTime = previousColumns[1];\n                const previousActivity = previousColumns[2];\n\n                const timeDifference = getTimeDifference(previousTime, time); // Função para calcular a diferença de tempo\n                const dateDifference = getDateDifference(previousDate, date); // Função para calcular a diferença de data\n\n                if (timeDifference > 10000 || dateDifference !== 0 || previousActivity !== activity) {\n                    activities.push(currentActivity);\n                    currentActivity = [];\n                }\n            }\n\n            currentActivity.push({\n                date: date,\n                time: time,\n                acceleration_x: parseFloat(columns[3]),\n                acceleration_y: parseFloat(columns[4]),\n                acceleration_z: parseFloat(columns[5]),\n                gyro_x: parseFloat(columns[6]),\n                gyro_y: parseFloat(columns[7]),\n                gyro_z: parseFloat(columns[8])\n            });\n        }\n\n        for (const activity of activities) {\n            node.send({ payload: activity });\n        }\n    }\n});\n\n// Função para calcular a diferença de tempo em milissegundos\nfunction getTimeDifference(time1, time2) {\n    const date1 = new Date(`20${time1.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    const date2 = new Date(`20${time2.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    return Math.abs(date2 - date1);\n}\n\n// Função para calcular a diferença de datas em dias\nfunction getDateDifference(date1, date2) {\n    const dateParts1 = date1.split('/').map(Number); // Convertendo a string em partes numéricas\n    const dateParts2 = date2.split('/').map(Number); // Convertendo a string em partes numéricas\n\n    const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]); // Criando objeto de data para a primeira data\n    const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]); // Criando objeto de data para a segunda data\n\n    const difference = Math.abs(d2.getTime() - d1.getTime()); // Calculando a diferença em milissegundos\n    const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24)); // Convertendo para dias\n\n    return differenceInDays;\n}\n",
+        "func": "let currentActivity = [];\nlet lastDate = null;\nlet lastTime = null;\nlet lastActivity = null;\n\nfunction processActivity(activityData) {\n    const date = activityData.date;\n    const time = activityData.time;\n    const activity = activityData.activity;\n\n    if (!lastDate || !lastTime || !lastActivity) {\n        // Se for a primeira linha ou se algum dado anterior não existe\n        lastDate = date;\n        lastTime = time;\n        lastActivity = activity;\n    }\n\n    const timeDifference = getTimeDifference(lastTime, time);\n    const dateDifference = getDateDifference(lastDate, date);\n\n    if (timeDifference > 10000 || dateDifference !== 0 || lastActivity !== activity) {\n        if (currentActivity.length > 0) {\n            // Envia a atividade agrupada quando há uma mudança\n            node.send({ payload: currentActivity });\n        }\n        // Reinicia o array para iniciar uma nova atividade\n        currentActivity = [];\n    }\n\n    // Adiciona os dados à atividade atual\n    currentActivity.push(activityData);\n\n    // Atualiza os dados do último registro\n    lastDate = date;\n    lastTime = time;\n    lastActivity = activity;\n}\n\n// Recebe as linhas do CSV\nconst rows = msg.payload; // Supondo que os dados do CSV estejam na mensagem recebida\n\nfor (let i = 1; i < rows.length; i++) {\n    const columns = rows[i].split(';'); // Separando colunas\n\n    const activityData = {\n        date: columns[0],\n        time: columns[1],\n        activity: columns[2],\n        acceleration_x: parseFloat(columns[3]),\n        acceleration_y: parseFloat(columns[4]),\n        acceleration_z: parseFloat(columns[5]),\n        gyro_x: parseFloat(columns[6]),\n        gyro_y: parseFloat(columns[7]),\n        gyro_z: parseFloat(columns[8])\n    };\n\n    processActivity(activityData);\n}\n\n// Envia a última atividade\nif (currentActivity.length > 0) {\n    node.send({ payload: currentActivity });\n}\n\n// Função para calcular a diferença de tempo em milissegundos\nfunction getTimeDifference(time1, time2) {\n    const date1 = new Date(`20${time1.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    const date2 = new Date(`20${time2.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    return Math.abs(date2 - date1);\n}\n\n// Função para calcular a diferença de datas em dias\nfunction getDateDifference(date1, date2) {\n    const dateParts1 = date1.split('/').map(Number); // Convertendo a string em partes numéricas\n    const dateParts2 = date2.split('/').map(Number); // Convertendo a string em partes numéricas\n\n    const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]); // Criando objeto de data para a primeira data\n    const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]); // Criando objeto de data para a segunda data\n\n    const difference = Math.abs(d2.getTime() - d1.getTime()); // Calculando a diferença em milissegundos\n    const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24)); // Convertendo para dias\n\n    return differenceInDays;\n}",
         "outputs": 1,
         "timeout": 0,
-        "noerr": 9,
+        "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 240,
-        "y": 380,
+        "x": 540,
+        "y": 480,
         "wires": [
             []
         ]
@@ -569,8 +583,8 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 260,
-        "y": 480,
+        "x": 280,
+        "y": 320,
         "wires": [
             [
                 "3ebcb1b2087973ee"
@@ -593,7 +607,7 @@
         "include_empty_strings": "",
         "include_null_values": "",
         "x": 450,
-        "y": 480,
+        "y": 320,
         "wires": [
             [
                 "f2a03e5d9015a12d"
@@ -625,6 +639,223 @@
         "y": 100,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "e91f5b016bc30f01",
+        "type": "inject",
+        "z": "031fa5fc0fd5aafd",
+        "name": "start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "2313f275d2af8a0b"
+            ]
+        ]
+    },
+    {
+        "id": "2313f275d2af8a0b",
+        "type": "file in",
+        "z": "031fa5fc0fd5aafd",
+        "name": "Trainingset",
+        "filename": "/data/Fitness_training.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "60438724a528f7ae"
+            ]
+        ]
+    },
+    {
+        "id": "6baf2ed44be12718",
+        "type": "debug",
+        "z": "031fa5fc0fd5aafd",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 870,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "60438724a528f7ae",
+        "type": "csv",
+        "z": "031fa5fc0fd5aafd",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "edc86d87e623b593"
+            ]
+        ]
+    },
+    {
+        "id": "edc86d87e623b593",
+        "type": "function",
+        "z": "031fa5fc0fd5aafd",
+        "name": "function 2",
+        "func": "let currentActivity = [];\nlet lastDate = null;\nlet lastTime = null;\nlet lastActivity = null;\n\nfunction processActivity(activityData) {\n    const date = activityData.date;\n    const time = activityData.time;\n    const activity = activityData.activity;\n\n    if (!lastDate || !lastTime || !lastActivity) {\n        // Se for a primeira linha ou se algum dado anterior não existe\n        lastDate = date;\n        lastTime = time;\n        lastActivity = activity;\n    }\n\n    const timeDifference = getTimeDifference(lastTime, time);\n    const dateDifference = getDateDifference(lastDate, date);\n\n    if (timeDifference > 10000 || dateDifference !== 0 || lastActivity !== activity) {\n        if (currentActivity.length > 0) {\n            // Envia a atividade agrupada quando há uma mudança\n            node.send({ payload: currentActivity });\n        }\n        // Reinicia o array para iniciar uma nova atividade\n        currentActivity = [];\n    }\n\n    // Adiciona os dados à atividade atual\n    currentActivity.push(activityData);\n\n    // Atualiza os dados do último registro\n    lastDate = date;\n    lastTime = time;\n    lastActivity = activity;\n}\n\n// Recebe as linhas do CSV\nconst rows = msg.payload; // Supondo que os dados do CSV estejam na mensagem recebida\n\nfor (let i = 1; i < rows.length; i++) {\n    const columns = rows[i].split(';'); // Separando colunas\n\n    const activityData = {\n        date: columns[0],\n        time: columns[1],\n        activity: columns[2],\n        acceleration_x: parseFloat(columns[3]),\n        acceleration_y: parseFloat(columns[4]),\n        acceleration_z: parseFloat(columns[5]),\n        gyro_x: parseFloat(columns[6]),\n        gyro_y: parseFloat(columns[7]),\n        gyro_z: parseFloat(columns[8])\n    };\n\n    processActivity(activityData);\n}\n\n// Envia a última atividade\nif (currentActivity.length > 0) {\n    node.send({ payload: currentActivity });\n}\n\n// Função para calcular a diferença de tempo em milissegundos\nfunction getTimeDifference(time1, time2) {\n    const date1 = new Date(`20${time1.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    const date2 = new Date(`20${time2.replace(/:/g, '-')}`).getTime(); // Transformando em timestamp\n    return Math.abs(date2 - date1);\n}\n\n// Função para calcular a diferença de datas em dias\nfunction getDateDifference(date1, date2) {\n    const dateParts1 = date1.split('/').map(Number); // Convertendo a string em partes numéricas\n    const dateParts2 = date2.split('/').map(Number); // Convertendo a string em partes numéricas\n\n    const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]); // Criando objeto de data para a primeira data\n    const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]); // Criando objeto de data para a segunda data\n\n    const difference = Math.abs(d2.getTime() - d1.getTime()); // Calculando a diferença em milissegundos\n    const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24)); // Convertendo para dias\n\n    return differenceInDays;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "6baf2ed44be12718"
+            ]
+        ]
+    },
+    {
+        "id": "46cd675a48efe846",
+        "type": "inject",
+        "z": "a4bf4391a43c73d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "f9cb1b1514d3875b"
+            ]
+        ]
+    },
+    {
+        "id": "f9cb1b1514d3875b",
+        "type": "file in",
+        "z": "a4bf4391a43c73d8",
+        "name": "",
+        "filename": "/data/fit_debug.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 310,
+        "y": 80,
+        "wires": [
+            [
+                "59b1201c14e86486"
+            ]
+        ]
+    },
+    {
+        "id": "59b1201c14e86486",
+        "type": "csv",
+        "z": "a4bf4391a43c73d8",
+        "name": "",
+        "sep": ";",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "7066898bd63befde"
+            ]
+        ]
+    },
+    {
+        "id": "fa72d207b25a4bec",
+        "type": "debug",
+        "z": "a4bf4391a43c73d8",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7066898bd63befde",
+        "type": "function",
+        "z": "a4bf4391a43c73d8",
+        "name": "ProcessData",
+        "func": "function processActivity(activityData) {\n\n  const date = activityData.col1;\n  const time = activityData.col2;\n  const activity = parseInt(activityData.col3);\n  const acceleration_x = activityData.col4 ? parseFloat(activityData.col4) : null;\n  const acceleration_y = activityData.col5 ? parseFloat(activityData.col5) : null;\n  const acceleration_z = activityData.col6 ? parseFloat(activityData.col6) : null;\n  const gyro_x = activityData.col7 ? parseFloat(activityData.col7) : null;\n  const gyro_y = activityData.col8 ? parseFloat(activityData.col8) : null;\n  const gyro_z = activityData.col9 ? parseFloat(activityData.col9) : null;\n\n  node.warn(`Incoming data: date=${date}, time=${time}, activity=${activity}`);\n  node.warn(`Current state: lastDate=${context.get('lastDate')}, lastTime=${context.get('lastTime')}, lastActivity=${context.get('lastActivity')}`);\n\n  // Use context variable for currentActivity array\n  let currentActivity = context.get('currentActivity') || [];\n\n  if (context.get('lastDate') === undefined || context.get('lastTime') === undefined || context.get('lastActivity') === undefined) {\n      context.set('lastDate', date);\n      context.set('lastTime', time);\n      context.set('lastActivity', activity);\n  } else {  \n      const timeDifference = getTimeDifference(context.get('lastTime'), time);\n      const dateDifference = getDateDifference(context.get('lastDate'), date);\n      node.warn('timediff:' + timeDifference + ' ' + 'datedif:' + dateDifference);\n      if (timeDifference > 1000 || dateDifference !== 0 || context.get('lastActivity') !== activity) {\n          if (currentActivity.length > 0) {\n              node.send({ payload: currentActivity });\n              currentActivity = [];\n              node.warn(\"Data sent and currentActivity array reset.\");\n          }\n      }\n\n      currentActivity.push({\n          date,\n          time,\n          activity,\n          acceleration_x,\n          acceleration_y,\n          acceleration_z,\n          gyro_x,\n          gyro_y,\n          gyro_z\n      });\n\n      context.set('lastDate', date);\n      context.set('lastTime', time);\n      context.set('lastActivity', activity);\n      node.warn('Group Data:' + context.get('lastDate') + 'time:' + context.get('lastTime'));\n  }\n\n  // Update context variable\n  context.set('currentActivity', currentActivity);\n}\n\nconst csvData = msg.payload;\nprocessActivity(csvData);\n\nfunction getTimeDifference(time1, time2) {\n  const timeParts1 = time1.split(':').map(Number);\n  const timeParts2 = time2.split(':').map(Number);\n\n  const date1 = new Date(2023, 6, 1, timeParts1[0], timeParts1[1], timeParts1[2]).getTime();\n  const date2 = new Date(2023, 6, 1, timeParts2[0], timeParts2[1], timeParts2[2]).getTime();\n\n  return Math.abs(date2 - date1);\n}\n\n\nfunction getDateDifference(date1, date2) {\n  node.warn(date1 + \"-\" + date2);\n  const dateParts1 = date1.split('/').map(Number);\n  const dateParts2 = date2.split('/').map(Number);\n\n  const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);\n  const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);\n\n  const difference = Math.abs(d2.getTime() - d1.getTime());\n  const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));\n\n  return differenceInDays;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "fa72d207b25a4bec"
+            ]
         ]
     }
 ]
