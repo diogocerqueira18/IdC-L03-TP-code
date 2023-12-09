@@ -39,6 +39,30 @@
         "env": []
     },
     {
+        "id": "81593b8e646dc62e",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0c62517a30e0dcf7",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "535f1bfd43d75403",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "037aecdc6926ce9a",
         "type": "mqtt-broker",
         "name": "IdC",
@@ -95,12 +119,176 @@
     {
         "id": "72f114b81c497b2b",
         "type": "ui_group",
-        "name": "dash1",
-        "tab": "",
+        "name": "login",
+        "tab": "d7bc0866ee38a6f7",
+        "order": 2,
         "disp": false,
         "width": "6",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "87a17258947b7937",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "f8bac202fbe387ec",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8be53847c1a26213",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8be53847c1a26213",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "4ed886cab5cb1eba",
+        "type": "ui_group",
+        "name": "register",
+        "tab": "637f625a57aed659",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d7bc0866ee38a6f7",
+        "type": "ui_tab",
+        "name": "Login",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": true
+    },
+    {
+        "id": "637f625a57aed659",
+        "type": "ui_tab",
+        "name": "Register",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": true
+    },
+    {
+        "id": "ada4e0c8.ca2d58",
+        "type": "ui_group",
+        "z": "81593b8e646dc62e",
+        "name": "Default",
+        "tab": "e4c8df5a.bc9048",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "e4c8df5a.bc9048",
+        "type": "ui_tab",
+        "z": "81593b8e646dc62e",
+        "name": "tab2",
+        "icon": "dashboard"
     },
     {
         "id": "3cc11d24.ff01a2",
@@ -1002,6 +1190,964 @@
             [
                 "7ab422c25a2ec068"
             ]
+        ]
+    },
+    {
+        "id": "b0ef65332c1e51bd",
+        "type": "http request",
+        "z": "81593b8e646dc62e",
+        "name": "login",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "http://app:8000/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "afb6f26c044cfda2"
+            ]
+        ]
+    },
+    {
+        "id": "7a5d027f5686d321",
+        "type": "ui_button",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "group": "72f114b81c497b2b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Register",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Register\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "83478d3230fe9462"
+            ]
+        ]
+    },
+    {
+        "id": "83478d3230fe9462",
+        "type": "ui_ui_control",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "events": "all",
+        "x": 620,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0066f8035a0114ed",
+        "type": "ui_form",
+        "z": "81593b8e646dc62e",
+        "d": true,
+        "name": "",
+        "label": "Register",
+        "group": "4ed886cab5cb1eba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "username",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Name",
+                "value": "name",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Age",
+                "value": "age",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Weight",
+                "value": "weight",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Height",
+                "value": "height",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Male",
+                "value": "male",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": "",
+            "name": "",
+            "age": "",
+            "weight": "",
+            "height": "",
+            "male": false
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 420,
+        "y": 540,
+        "wires": [
+            [
+                "8fda3c4ead4ddf10"
+            ]
+        ]
+    },
+    {
+        "id": "4ef92dd1a6639699",
+        "type": "ui_button",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "group": "4ed886cab5cb1eba",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "login",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Login\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 410,
+        "y": 400,
+        "wires": [
+            [
+                "83478d3230fe9462"
+            ]
+        ]
+    },
+    {
+        "id": "9ee450a907ed1f27",
+        "type": "ui_form",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "label": "Login",
+        "group": "72f114b81c497b2b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "username",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "b0ef65332c1e51bd"
+            ]
+        ]
+    },
+    {
+        "id": "afb6f26c044cfda2",
+        "type": "function",
+        "z": "81593b8e646dc62e",
+        "name": "function 4",
+        "func": "if (msg.statusCode == 404){\n    return result = {\"payload\" : {\"result\":0}}\n}else{\n    global.set('username',msg.payload);\n    return result = {\"payload\" : {\"result\": 1, \"username\": msg.payload}}\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 220,
+        "wires": [
+            [
+                "35272741fc7ca94c"
+            ]
+        ]
+    },
+    {
+        "id": "35272741fc7ca94c",
+        "type": "switch",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "property": "payload.result",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 220,
+        "wires": [
+            [
+                "7c9ae651f12caafa"
+            ],
+            [
+                "b18c489409387986"
+            ]
+        ]
+    },
+    {
+        "id": "0ad2b0c6b6c924ea",
+        "type": "ui_toast",
+        "z": "81593b8e646dc62e",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 1270,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7c9ae651f12caafa",
+        "type": "template",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "User not found!",
+        "output": "str",
+        "x": 1100,
+        "y": 180,
+        "wires": [
+            [
+                "0ad2b0c6b6c924ea"
+            ]
+        ]
+    },
+    {
+        "id": "0fb05633525af417",
+        "type": "ui_ui_control",
+        "z": "81593b8e646dc62e",
+        "name": "",
+        "events": "change",
+        "x": 1240,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b18c489409387986",
+        "type": "function",
+        "z": "81593b8e646dc62e",
+        "name": "function 5",
+        "func": "msg.payload = {\n    \"tab\": \"Home\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 260,
+        "wires": [
+            [
+                "0fb05633525af417"
+            ]
+        ]
+    },
+    {
+        "id": "8fda3c4ead4ddf10",
+        "type": "http request",
+        "z": "81593b8e646dc62e",
+        "name": "login",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "http://app:8000/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a4fbef83c489238",
+        "type": "ui_template",
+        "z": "81593b8e646dc62e",
+        "group": "4ed886cab5cb1eba",
+        "name": "",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "format": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Register</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f4f4f4;\n        }\n\n        form {\n            background-color: #fff;\n            padding: 20px;\n        }\n\n        label {\n            display: block;\n            margin-bottom: 8px;\n        }\n\n        input,\n        select {\n            width: 100%;\n            padding: 8px;\n            margin-bottom: 16px;\n            box-sizing: border-box;\n        }\n\n        button {\n            background-color: rgb(0, 148, 206);\n            color: #fff;\n            padding: 10px 15px;\n            border: none;\n            border-radius: 4px;\n            cursor: pointer;\n        }\n\n        button:hover {\n            background-color: #0094ce;\n        }\n    </style>\n</head>\n\n<body>\n\n    <form action=\"#\" method=\"post\">\n        <label for=\"username\">Username:</label>\n        <input type=\"text\" id=\"username\" name=\"username\" required>\n\n        <label for=\"password\">Password:</label>\n        <input type=\"password\" id=\"password\" name=\"password\" required>\n\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\" required>\n\n        <label for=\"age\">Age (20-89):</label>\n        <input type=\"number\" id=\"age\" name=\"age\" min=\"20\" max=\"89\" required>\n\n        <label for=\"weight\">Weight:</label>\n        <input type=\"number\" id=\"weight\" name=\"weight\" required>\n\n        <label for=\"height\">Height:</label>\n        <input type=\"number\" id=\"height\" name=\"height\" required>\n\n        <label for=\"gender\">Gender:</label>\n        <select id=\"gender\" name=\"gender\" required>\n        <option value=\"female\">Female</option>\n        <option value=\"male\">Male</option>\n    </select>\n\n    <button type=\"button\" onclick=\"send({payload:action()})\">Submit</button>\n    </form>\n    <script>\n        value = {\n            username = document.getElementById(\"username\").value;\n            password = document.getElementById(\"password\").value;\n            name = document.getElementById(\"name\").value;\n            age = document.getElementById(\"age\").value;\n            weight = document.getElementById(\"weight\").value;\n            height = document.getElementById(\"height\").value;\n            gender = document.getElementById(\"gender\").value;\n        };\n        // Função para definir valores do payload\n        his.scope.action = function() { return value; }\n    </script>\n    \n</body>\n\n</html>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 900,
+        "y": 520,
+        "wires": [
+            [
+                "411e375cd13ea6f7"
+            ]
+        ]
+    },
+    {
+        "id": "411e375cd13ea6f7",
+        "type": "debug",
+        "z": "81593b8e646dc62e",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "072bc412d90b9230",
+        "type": "ui_template",
+        "z": "81593b8e646dc62e",
+        "group": "72f114b81c497b2b",
+        "name": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n    var value = \"hello world\";\n// or overwrite value in your callback function ...\nthis.scope.action = function() { return value; }\n</script>\n<md-button ng-click=\"send({payload:action()})\">\n    Click me to send a hello world\n</md-button>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 900,
+        "y": 700,
+        "wires": [
+            [
+                "411e375cd13ea6f7"
+            ]
+        ]
+    },
+    {
+        "id": "5f0218037c596c7d",
+        "type": "file in",
+        "z": "0c62517a30e0dcf7",
+        "name": "FitnessTraining",
+        "filename": "/data/Fitness_training.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "0d3adab2f6e472a8"
+            ]
+        ]
+    },
+    {
+        "id": "0d3adab2f6e472a8",
+        "type": "csv",
+        "z": "0c62517a30e0dcf7",
+        "name": "",
+        "sep": ";",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "93d870641916063e"
+            ]
+        ]
+    },
+    {
+        "id": "5412a994adeca1b1",
+        "type": "http request",
+        "z": "0c62517a30e0dcf7",
+        "name": "velocity",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "http://app:8000/velocity",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 320,
+        "wires": [
+            [
+                "03d91875bf6d8334"
+            ]
+        ]
+    },
+    {
+        "id": "232e01dfbda1b5df",
+        "type": "function",
+        "z": "0c62517a30e0dcf7",
+        "name": "sendUserData",
+        "func": "const msgData = msg.payload;\n\nconst request = {\n    Age:msgData.age,\n    Gender:msgData.gender\n}\n\nmsg.payload = request;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "5412a994adeca1b1"
+            ]
+        ]
+    },
+    {
+        "id": "93d870641916063e",
+        "type": "function",
+        "z": "0c62517a30e0dcf7",
+        "name": "divideActivities",
+        "func": "function processActivity(activityData) {\n\n  const date = activityData.col1;\n  const time = activityData.col2;\n  const activity = parseInt(activityData.col3);\n  const acceleration_x = activityData.col4 ? parseFloat(activityData.col4) : null;\n  const acceleration_y = activityData.col5 ? parseFloat(activityData.col5) : null;\n  const acceleration_z = activityData.col6 ? parseFloat(activityData.col6) : null;\n  const gyro_x = activityData.col7 ? parseFloat(activityData.col7) : null;\n  const gyro_y = activityData.col8 ? parseFloat(activityData.col8) : null;\n  const gyro_z = activityData.col9 ? parseFloat(activityData.col9) : null;\n\n  let currentActivity = context.get('currentActivity') || [];\n\n  if (context.get('lastDate') === undefined || context.get('lastTime') === undefined || context.get('lastActivity') === undefined) {\n    context.set('lastDate', date);\n    context.set('lastTime', time);\n    context.set('lastActivity', activity);\n  } else {\n    const timeDifference = getTimeDifference(context.get('lastTime'), time);\n    const dateDifference = getDateDifference(context.get('lastDate'), date);\n    if (timeDifference > 1000 || dateDifference !== 0 || context.get('lastActivity') !== activity) {\n      if (currentActivity.length > 0) {\n        node.send({ payload: currentActivity });\n        currentActivity = [];\n      }\n    }\n\n    currentActivity.push({\n      date,\n      time,\n      activity,\n      acceleration_x,\n      acceleration_y,\n      acceleration_z,\n      gyro_x,\n      gyro_y,\n      gyro_z\n    });\n\n    context.set('lastDate', date);\n    context.set('lastTime', time);\n    context.set('lastActivity', activity);\n  }\n\n  // Update context variable\n  context.set('currentActivity', currentActivity);\n}\n\nconst csvData = msg.payload;\nprocessActivity(csvData);\n\nfunction getTimeDifference(time1, time2) {\n  const timeParts1 = time1.split(':').map(Number);\n  const timeParts2 = time2.split(':').map(Number);\n\n  const date1 = new Date(2023, 6, 1, timeParts1[0], timeParts1[1], timeParts1[2]).getTime();\n  const date2 = new Date(2023, 6, 1, timeParts2[0], timeParts2[1], timeParts2[2]).getTime();\n\n  return Math.abs(date2 - date1);\n}\n\n\nfunction getDateDifference(date1, date2) {\n  const dateParts1 = date1.split('/').map(Number);\n  const dateParts2 = date2.split('/').map(Number);\n\n  const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);\n  const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);\n\n  const difference = Math.abs(d2.getTime() - d1.getTime());\n  const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));\n\n  return differenceInDays;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 80,
+        "wires": [
+            [
+                "b681cab7c2809124"
+            ]
+        ]
+    },
+    {
+        "id": "03d91875bf6d8334",
+        "type": "function",
+        "z": "0c62517a30e0dcf7",
+        "name": "sendUserVelocity",
+        "func": "if (msg.payload && msg.payload.age) {\n    context.set('user', msg.payload);\n} else if (msg.payload && msg.payload.velocity) {\n    context.set('velocity', msg.payload);\n}\n\ncontext.set('dataSent', false);\n\nif (context.get('user') !== undefined && context.get('velocity') !== undefined && context.get('dataSent') !== true) {\n    var user = context.get('user');\n    var requestData = {\n        Age: user.age,\n        Weight: user.weight,\n        Height: user.height,\n        Velocity: context.get('velocity').velocity\n    };\n\n    msg.payload = requestData;\n    msg.type = 'datarequest'\n    context.set('dataSent', true);\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "8feefb6c03fe6e22"
+            ]
+        ]
+    },
+    {
+        "id": "8feefb6c03fe6e22",
+        "type": "function",
+        "z": "0c62517a30e0dcf7",
+        "name": "processData",
+        "func": "const msgreq = msg.payload;\nlet datasaved = context.get('datasaved') || false;\nlet unprocessedData = context.get('unprocessedData') || [];\n\nif (msg.type === \"datarequest\" && datasaved === false) {\n    context.set('data', msg.payload);\n    datasaved = true;\n    context.set('datasaved', datasaved);\n} else {\n    unprocessedData.push(msgreq);\n    context.set('unprocessedData', unprocessedData);\n}\n\nif (datasaved && unprocessedData !== null && unprocessedData !== undefined) {\n    unprocessedData.forEach(function (data) {\n        node.warn(data);\n        msg.payload = processData(data);\n        node.send(msg);\n    });\n}\n\nfunction formatDateForDB(date) {\n    const formattedTime = date.slice(0, 8); // Extracts the HH:MM:SS part\n    return formattedTime;\n}\n\nfunction processData(currentActivity) {\n    let totalDistance = 0;\n    let totalDuration = 0;\n    let totalCaloriesBurned = 0;\n    node.warn(currentActivity[0]);\n    let activity = currentActivity[0].activity;\n    let velocities = context.get('data').Velocity;\n    let weight = context.get('data').Weight;\n    let height = context.get('data').Height;\n    let velocity;\n    if (activity !== -1)\n        velocity = activity === 0 ? velocities : velocities * 2;\n\n    totalCaloriesBurned = 0.035 * weight + ((velocity * velocity) / height) * 0.029 * weight;\n    \n    currentActivity.sort(function (a, b) {\n        const formattedDateA = a.date.split('/').reverse().join('-'); // Convert date to YYYY-MM-DD format\n        const formattedDateB = b.date.split('/').reverse().join('-'); // Convert date to YYYY-MM-DD format\n        const formattedTimeA = a.time.split(':').slice(0, 3).join(':'); // Get only the hours, minutes, and seconds\n        const formattedTimeB = b.time.split(':').slice(0, 3).join(':'); // Get only the hours, minutes, and seconds\n        const timeA = new Date(`${formattedDateA}T${formattedTimeA}`).getTime();\n        const timeB = new Date(`${formattedDateB}T${formattedTimeB}`).getTime();\n        return timeA - timeB;\n    });\n    \n    node.warn(currentActivity);\n    let timestamp;\n    if (currentActivity.length > 1) {\n        const firstDatestamp = currentActivity[0].date ? formatDate(currentActivity[0].date) : 0;\n        const lastDatestamp = currentActivity[currentActivity.length - 1].date ? formatDate(currentActivity[currentActivity.length - 1].date) : 0;\n\n        const firstTimestamp = currentActivity[0].time ? currentActivity[0].time : 0;\n        const lastTimestamp = currentActivity[currentActivity.length - 1].time ? currentActivity[currentActivity.length - 1].time : 0;\n        \n        timestamp = (firstDatestamp + 'T' + firstTimestamp);\n        const time1 = extractTime(timestamp);\n        timestamp = (lastDatestamp + 'T' + lastTimestamp);\n        const time2 = extractTime(timestamp);\n\n        const durationSeconds = Math.abs(time1 - time2);\n        totalDuration = durationSeconds;\n        totalDistance = velocities * (durationSeconds/3600);\n    } else {\n        const firstDatestamp = currentActivity[0].date ? formatDate(currentActivity[0].date) : 0;\n        const firstTimestamp = currentActivity[0].time ? currentActivity[0].time : 0;\n        timestamp = (firstDatestamp + 'T' + firstTimestamp);\n    }\n\n    const formattedCalories = parseFloat(totalCaloriesBurned).toFixed(2); // Assuming 2 decimal places for calories\n    const formattedDistance = parseFloat(totalDistance).toFixed(2); // Assuming 2 decimal places for distance\n\n    // Convert duration from seconds to HH:MM:SS format\n    const formattedDuration = formatDuration(totalDuration);\n    const formattedDate = formatDateForDB(timestamp);\n    node.warn(formattedDate);\n    const calculatedData = {\n        Date: formattedDate,\n        ActivityType: activity,\n        Distance: formattedDistance,\n        Duration: formattedDuration,\n        CaloriesBurned: formattedCalories\n    };\n\n    return calculatedData;\n}\n\nfunction formatDuration(durationInSeconds) {\n    const hours = Math.floor(durationInSeconds / 3600);\n    const minutes = Math.floor((durationInSeconds % 3600) / 60);\n    const seconds = durationInSeconds % 60;\n\n    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;\n}\n\nfunction formatDate(date) {\n var day = date.split(\"/\")[0];\n var month = date.split(\"/\")[1];\n var year = date.split(\"/\")[2];\n\n return year + '-' + (\"0\"+month).slice(-2) + '-' + (\"0\"+day).slice(-2);\n}\n\nfunction extractTime(timestamp) {\n    const timeComponents = timestamp.split(\"T\")[1].split(\":\");\n    const hours = parseInt(timeComponents[0], 10);\n    const minutes = parseInt(timeComponents[1], 10);\n    const seconds = parseInt(timeComponents[2], 10);\n\n    // Convert to total seconds since midnight\n    return hours * 3600 + minutes * 60 + seconds;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "31c33361ad1c8b71"
+            ]
+        ]
+    },
+    {
+        "id": "b681cab7c2809124",
+        "type": "debug",
+        "z": "0c62517a30e0dcf7",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "31c33361ad1c8b71",
+        "type": "http request",
+        "z": "0c62517a30e0dcf7",
+        "name": "sendData",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/insert",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 940,
+        "y": 200,
+        "wires": [
+            [
+                "cc500f5337b622c7"
+            ]
+        ]
+    },
+    {
+        "id": "3891082a8edf30fd",
+        "type": "inject",
+        "z": "0c62517a30e0dcf7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "5f0218037c596c7d"
+            ]
+        ]
+    },
+    {
+        "id": "cc500f5337b622c7",
+        "type": "debug",
+        "z": "0c62517a30e0dcf7",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "42e520124034f762",
+        "type": "http request",
+        "z": "0c62517a30e0dcf7",
+        "name": "User",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/user/{{{payload}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "232e01dfbda1b5df",
+                "03d91875bf6d8334"
+            ]
+        ]
+    },
+    {
+        "id": "38c8aef6cfea7c74",
+        "type": "inject",
+        "z": "0c62517a30e0dcf7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "username",
+        "payloadType": "global",
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "42e520124034f762"
+            ]
+        ]
+    },
+    {
+        "id": "060f7b871500a296",
+        "type": "inject",
+        "z": "535f1bfd43d75403",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 320,
+        "wires": [
+            [
+                "96cccd99144b784d",
+                "9eb9c59d0715cdd9"
+            ]
+        ]
+    },
+    {
+        "id": "9eb9c59d0715cdd9",
+        "type": "file in",
+        "z": "535f1bfd43d75403",
+        "name": "FitnessTraining",
+        "filename": "/data/Fitness_training.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "d70a63be2b633863"
+            ]
+        ]
+    },
+    {
+        "id": "d70a63be2b633863",
+        "type": "csv",
+        "z": "535f1bfd43d75403",
+        "name": "",
+        "sep": ";",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "ef262a90caac03a8"
+            ]
+        ]
+    },
+    {
+        "id": "96cccd99144b784d",
+        "type": "http request",
+        "z": "535f1bfd43d75403",
+        "name": "User",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/users/2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "a81a960bd85eb2b5",
+                "1e45a5e279d65fa2"
+            ]
+        ]
+    },
+    {
+        "id": "9e8106e991d81c69",
+        "type": "http request",
+        "z": "535f1bfd43d75403",
+        "name": "velocity",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "http://app:8000/velocity",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 680,
+        "y": 320,
+        "wires": [
+            [
+                "1e45a5e279d65fa2"
+            ]
+        ]
+    },
+    {
+        "id": "a81a960bd85eb2b5",
+        "type": "function",
+        "z": "535f1bfd43d75403",
+        "name": "sendUserData",
+        "func": "const msgData = msg.payload;\n\nconst request = {\n    Age:msgData.Age,\n    Gender:msgData.Gender\n}\n\nmsg.payload = request;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "9e8106e991d81c69"
+            ]
+        ]
+    },
+    {
+        "id": "ef262a90caac03a8",
+        "type": "function",
+        "z": "535f1bfd43d75403",
+        "name": "divideActivities",
+        "func": "function processActivity(activityData) {\n\n  const date = activityData.col1;\n  const time = activityData.col2;\n  const activity = parseInt(activityData.col3);\n  const acceleration_x = activityData.col4 ? parseFloat(activityData.col4) : null;\n  const acceleration_y = activityData.col5 ? parseFloat(activityData.col5) : null;\n  const acceleration_z = activityData.col6 ? parseFloat(activityData.col6) : null;\n  const gyro_x = activityData.col7 ? parseFloat(activityData.col7) : null;\n  const gyro_y = activityData.col8 ? parseFloat(activityData.col8) : null;\n  const gyro_z = activityData.col9 ? parseFloat(activityData.col9) : null;\n\n  let currentActivity = context.get('currentActivity') || [];\n\n  if (context.get('lastDate') === undefined || context.get('lastTime') === undefined || context.get('lastActivity') === undefined) {\n    context.set('lastDate', date);\n    context.set('lastTime', time);\n    context.set('lastActivity', activity);\n  } else {\n    const timeDifference = getTimeDifference(context.get('lastTime'), time);\n    const dateDifference = getDateDifference(context.get('lastDate'), date);\n    if (timeDifference > 1000 || dateDifference !== 0 || context.get('lastActivity') !== activity) {\n      if (currentActivity.length > 0) {\n        node.send({ payload: currentActivity });\n        currentActivity = [];\n      }\n    }\n\n    currentActivity.push({\n      date,\n      time,\n      activity,\n      acceleration_x,\n      acceleration_y,\n      acceleration_z,\n      gyro_x,\n      gyro_y,\n      gyro_z\n    });\n\n    context.set('lastDate', date);\n    context.set('lastTime', time);\n    context.set('lastActivity', activity);\n  }\n\n  // Update context variable\n  context.set('currentActivity', currentActivity);\n}\n\nconst csvData = msg.payload;\nprocessActivity(csvData);\n\nfunction getTimeDifference(time1, time2) {\n  const timeParts1 = time1.split(':').map(Number);\n  const timeParts2 = time2.split(':').map(Number);\n\n  const date1 = new Date(2023, 6, 1, timeParts1[0], timeParts1[1], timeParts1[2]).getTime();\n  const date2 = new Date(2023, 6, 1, timeParts2[0], timeParts2[1], timeParts2[2]).getTime();\n\n  return Math.abs(date2 - date1);\n}\n\n\nfunction getDateDifference(date1, date2) {\n  const dateParts1 = date1.split('/').map(Number);\n  const dateParts2 = date2.split('/').map(Number);\n\n  const d1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);\n  const d2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);\n\n  const difference = Math.abs(d2.getTime() - d1.getTime());\n  const differenceInDays = Math.ceil(difference / (1000 * 3600 * 24));\n\n  return differenceInDays;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 80,
+        "wires": [
+            [
+                "314d17274655fde0"
+            ]
+        ]
+    },
+    {
+        "id": "1e45a5e279d65fa2",
+        "type": "function",
+        "z": "535f1bfd43d75403",
+        "name": "sendUserVelocity",
+        "func": "if (msg.payload && msg.payload.Age) {\n    context.set('user', msg.payload);\n} else if (msg.payload && msg.payload.velocity){\n    context.set('velocity', msg.payload);\n}\n\ncontext.set('dataSent' , false);\n\nif (context.get('user') !== undefined && context.get('velocity') !== undefined && context.get('dataSent') !== true) {\n    var user = context.get('user');\n    var requestData = {\n        Age: user.Age,\n        Weight: user.Weight,\n        Height: user.Height,\n        Goal: user.Goal,\n        Velocity: context.get('velocity').velocity\n    };\n\n    msg.payload = requestData;\n    msg.type = 'datarequest'\n    context.set('dataSent', true);\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "5f9cb2cca83ef7d6"
+            ]
+        ]
+    },
+    {
+        "id": "5f9cb2cca83ef7d6",
+        "type": "function",
+        "z": "535f1bfd43d75403",
+        "name": "processData",
+        "func": "const msgreq = msg.payload;\nlet datasaved = context.get('datasaved') || false;\nlet unprocessedData = context.get('unprocessedData') || [];\n\nif (msg.type === \"datarequest\" && datasaved === false) {\n    context.set('data', msg.payload);\n    datasaved = true;\n    context.set('datasaved', datasaved);\n} else {\n    unprocessedData.push(msgreq);\n    context.set('unprocessedData', unprocessedData);\n}\n\nif (datasaved && unprocessedData !== null && unprocessedData !== undefined) {\n    unprocessedData.forEach(function (data) {\n        msg.payload = processData(data);\n        node.send(msg);\n    });\n}\n\nfunction formatDateForDB(date) {\n    const formattedTime = date.slice(0, 8); // Extracts the HH:MM:SS part\n    return formattedTime;\n}\n\nfunction processData(currentActivity) {\n    let totalDistance = 0;\n    let totalDuration = 0;\n    let totalCaloriesBurned = 0;\n    let activity = currentActivity[0].activity;\n    let velocities = context.get('data').Velocity;\n    let weight = context.get('data').Weight;\n    let height = context.get('data').Height;\n\n    let velocity;\n    if (activity !== -1)\n        velocity = activity === 0 ? velocities : velocities * 2;\n\n    totalCaloriesBurned = 0.035 * weight + ((velocity * velocity) / height) * 0.029 * weight;\n    \n    currentActivity.sort(function (a, b) {\n        const formattedDateA = a.date.split('/').reverse().join('-'); // Convert date to YYYY-MM-DD format\n        const formattedDateB = b.date.split('/').reverse().join('-'); // Convert date to YYYY-MM-DD format\n        const formattedTimeA = a.time.split(':').slice(0, 3).join(':'); // Get only the hours, minutes, and seconds\n        const formattedTimeB = b.time.split(':').slice(0, 3).join(':'); // Get only the hours, minutes, and seconds\n        const timeA = new Date(`${formattedDateA}T${formattedTimeA}`).getTime();\n        const timeB = new Date(`${formattedDateB}T${formattedTimeB}`).getTime();\n        return timeA - timeB;\n    });\n    \n    node.warn(currentActivity);\n    let timestamp;\n    if (currentActivity.length > 1) {\n        const firstDatestamp = currentActivity[0].date ? formatDate(currentActivity[0].date) : 0;\n        const lastDatestamp = currentActivity[currentActivity.length - 1].date ? formatDate(currentActivity[currentActivity.length - 1].date) : 0;\n\n        const firstTimestamp = currentActivity[0].time ? currentActivity[0].time : 0;\n        const lastTimestamp = currentActivity[currentActivity.length - 1].time ? currentActivity[currentActivity.length - 1].time : 0;\n        \n        timestamp = (firstDatestamp + 'T' + firstTimestamp);\n        const time1 = extractTime(timestamp);\n        timestamp = (lastDatestamp + 'T' + lastTimestamp);\n        const time2 = extractTime(timestamp);\n\n        const durationSeconds = Math.abs(time1 - time2);\n        totalDuration = durationSeconds;\n        totalDistance = velocities * (durationSeconds/3600);\n    } else {\n        const firstDatestamp = currentActivity[0].date ? formatDate(currentActivity[0].date) : 0;\n        const firstTimestamp = currentActivity[0].time ? currentActivity[0].time : 0;\n        timestamp = (firstDatestamp + 'T' + firstTimestamp);\n    }\n\n    const formattedCalories = parseFloat(totalCaloriesBurned).toFixed(2); // Assuming 2 decimal places for calories\n    const formattedDistance = parseFloat(totalDistance).toFixed(2); // Assuming 2 decimal places for distance\n\n    // Convert duration from seconds to HH:MM:SS format\n    const formattedDuration = formatDuration(totalDuration);\n    const formattedDate = formatDateForDB(timestamp);\n    node.warn(formattedDate);\n    const calculatedData = {\n        Date: formattedDate,\n        ActivityType: activity,\n        Distance: formattedDistance,\n        Duration: formattedDuration,\n        CaloriesBurned: formattedCalories\n    };\n\n    return calculatedData;\n}\n\nfunction formatDuration(durationInSeconds) {\n    const hours = Math.floor(durationInSeconds / 3600);\n    const minutes = Math.floor((durationInSeconds % 3600) / 60);\n    const seconds = durationInSeconds % 60;\n\n    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;\n}\n\nfunction formatDate(date) {\n var day = date.split(\"/\")[0];\n var month = date.split(\"/\")[1];\n var year = date.split(\"/\")[2];\n\n return year + '-' + (\"0\"+month).slice(-2) + '-' + (\"0\"+day).slice(-2);\n}\n\nfunction extractTime(timestamp) {\n    const timeComponents = timestamp.split(\"T\")[1].split(\":\");\n    const hours = parseInt(timeComponents[0], 10);\n    const minutes = parseInt(timeComponents[1], 10);\n    const seconds = parseInt(timeComponents[2], 10);\n\n    // Convert to total seconds since midnight\n    return hours * 3600 + minutes * 60 + seconds;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "723cdfd18577277e"
+            ]
+        ]
+    },
+    {
+        "id": "314d17274655fde0",
+        "type": "debug",
+        "z": "535f1bfd43d75403",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "723cdfd18577277e",
+        "type": "http request",
+        "z": "535f1bfd43d75403",
+        "name": "sendData",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://app:8000/insert",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 940,
+        "y": 200,
+        "wires": [
+            []
         ]
     }
 ]

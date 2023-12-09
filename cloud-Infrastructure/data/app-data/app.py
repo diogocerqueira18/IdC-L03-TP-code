@@ -12,7 +12,7 @@ db_config = {
     'database': 'dbIOT'
 }
 
-@app.route('/velocity', methods=['GET'])
+@app.route('/velocity', methods=['POST'])
 def get_velocity():
     try:
         data = request.get_json()
@@ -112,56 +112,95 @@ def get_activities():
     except mysql.connector.Error as err:
         return jsonify({'error': str(err)}), 500
 
-@app.route('/users/<int:user_id>', methods=['GET'])
-def get_user(user_id):
+@app.route('/login', methods=['POST'])
+def get_user():
+    feature_dict = request.get_json()
+    if not feature_dict:
+        return {
+            'error': 'Body is empty.'
+        }, 500
     try:
+        username = feature_dict['username']
+        password = feature_dict['password']
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        query = "SELECT * FROM Users WHERE UserID = %s"
-        cursor.execute(query, (user_id,))
-        data = cursor.fetchone()
+        query = "SELECT * FROM Users WHERE username = %s"
+        cursor.execute(query, (username,))
+        user = cursor.fetchone()
 
-        cursor.close()
-        connection.close()
-
-        if data:
-            user = {
-                'Age': data[2],
-                'Gender': data[3],
-                'Weight': float(data[4]),
-                'Height': float(data[5]),
-                'Goal': int(data[6])
-            }
-            return jsonify(user), 200
+        print(user)
+        if user is not None and user[1] == password:
+            return username, 200
         else:
-            return jsonify({'error': 'User not found'}), 404
+            return {'error': 'User not found'}, 404
 
     except mysql.connector.Error as err:
         return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()
 
 
-@app.route('/users', methods=['POST'])
-def create_user():
+@app.route('/register', methods=['POST'])
+def register():
+    user_data = request.get_json()
+    if not user_data:
+        return {'error': 'Body is empty.'}, 400
     try:
-        user_data = request.get_json()
-        if not user_data:
-            return {'error': 'Body is empty.'}, 400
-
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        query = "INSERT INTO Users (UserName, Age, Gender, Weight, Height, Goal) VALUES (%s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (user_data['UserName'], user_data['Age'], user_data['Gender'],
-                               user_data['Weight'], user_data['Height'], user_data['Goal']))
+        query_exists = "SELECT * FROM Users WHERE username = %s"
+        cursor.execute(query_exists, (user_data['username'],))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            return jsonify({'error': 'User already exists'}), 409
+
+        query_insert = "INSERT INTO Users (username, password, Name, Age, Gender, Weight, Height) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query_insert, (user_data['username'], user_data['password'], user_data['name'], user_data['age'], user_data['gender'],
+                               user_data['weight'], user_data['height'],))
         
         connection.commit()
-        cursor.close()
-        connection.close()
 
         return {'message': 'User created successfully'}, 201
     except mysql.connector.Error as err:
         return {'error': str(err)}, 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()
+
+
+@app.route('/user/<string:username>', methods=['GET'])
+def user(username):
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+        query = "SELECT * FROM Users WHERE username = %s"
+        cursor.execute(query, (username,))
+        user = cursor.fetchone()
+
+        if user is not None:
+            response = {
+                "name": user[2],
+                "age": user[3],
+                "gender": user[4],
+                "weight": user[5],
+                "height": user[6]
+            }
+            return response, 200
+        else:
+            return {'error': 'User not found'}, 404
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()  
+
 
 if __name__ == '__main__':
     app.run(debug=True)
