@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 import joblib
 import mysql.connector 
@@ -201,6 +202,294 @@ def user(username):
             cursor.close()
             connection.close()  
 
+
+@app.route('/all_today', methods=['GET'])
+def get_today_activities():
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        current_date = datetime.now().strftime("%Y-%m-%d")
+        #current_date = "2023-07-10"
+        query = "SELECT * FROM Activities WHERE Date = %s"
+        cursor.execute(query, (current_date,))
+        data = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+
+        
+
+        results = [0, 0, 0, 0, 0, 0]
+        for row in data:
+            print(type(row[5]))
+            if row[2] == 0:
+                results[0] += row[3]  # distance_walk
+                results[2] += row[5]  # calories_walk
+                results[4] += row[4].seconds  # time_walk
+            elif row[2] == 1:
+                results[1] += row[3]  # distance_run
+                results[3] += row[5]  # calories_run
+                results[5] += row[4].seconds  # time_run
+
+        temp = {
+            "distance_walk": results[0],
+            "distance_run": results[1],
+            "calories_walk": results[2],
+            "calories_run": results[3],
+            "time_walk": results[4],
+            "time_run": results[5]
+        }
+
+        return temp, 200
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()  
+
+
+@app.route('/all_month', methods=['GET'])
+def get_month_activities():
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        current_month = datetime.now().month
+        current_year = datetime.now().year
+
+        #current_month = datetime.strptime("2023-07-10", "%Y-%m-%d").month
+        #current_year = datetime.strptime("2023-07-10", "%Y-%m-%d").year
+
+        query = "SELECT * FROM Activities WHERE YEAR(Date) = %s AND MONTH(Date) = %s"
+        cursor.execute(query, (current_year, current_month))
+        data = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+
+        results = [0, 0, 0, 0, 0, 0]
+        for row in data:
+            if row[2] == 0:
+                results[0] += row[3]  # distance_walk
+                results[2] += row[5]  # calories_walk
+                results[4] += row[4].seconds  # time_walk
+            if row[2] == 1:
+                results[1] += row[3]  # distance_run
+                results[3] += row[5]  # calories_run
+                results[5] += row[4].seconds  # time_run    
+
+        temp = {
+            "distance_walk": results[0],
+            "distance_run": results[1],
+            "calories_walk": results[2],
+            "calories_run": results[3],
+            "time_walk": results[4],
+            "time_run": results[5]
+        }
+        return temp, 200
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close() 
+
+@app.route('/all_week', methods=['GET'])
+def get_week_activities():
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        #current_month = datetime.now().month
+        #current_year = datetime.now().year
+
+        data_atual = datetime.now()
+        primeiro_dia_semana = data_atual - timedelta(days=data_atual.weekday())
+        ultimo_dia_semana = primeiro_dia_semana + timedelta(days=6)
+
+        query = "SELECT * FROM Activities WHERE Date BETWEEN %s AND %s"
+        cursor.execute(query, (primeiro_dia_semana, ultimo_dia_semana))
+        data = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+
+        dias_da_semana = [0, 1, 2, 3, 4, 5, 6]
+
+        valores_semana = {}
+        for dia in dias_da_semana:
+            results = [0, 0, 0, 0, 0, 0]
+            for row in data:
+                if row[1].weekday() == dia:
+                    if row[2] == 0:
+                        results[0] += row[3]  # distance_walk
+                        results[2] += row[5]  # calories_walk
+                        results[4] += row[4].seconds  # time_walk
+                    if row[2] == 1:
+                        results[1] += row[3]  # distance_run
+                        results[3] += row[5]  # calories_run
+                        results[5] += row[4].seconds  # time_run     
+
+            temp = {
+                "distance_walk": results[0],
+                "distance_run": results[1],
+                "calories_walk": results[2],
+                "calories_run": results[3],
+                "time_walk": results[4],
+                "time_run": results[5]
+            }
+            valores_semana[dia] = temp
+
+        temp = {
+            "Segunda": valores_semana[0],
+            "Terça": valores_semana[1],
+            "Quarta": valores_semana[2],
+            "Quinta": valores_semana[3],
+            "Sexta": valores_semana[4],
+            "Sabado": valores_semana[5],
+            "Domingo": valores_semana[6]
+        }
+        return temp, 200
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close() 
+
+@app.route('/months', methods=['GET'])
+def get_months():
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        primeiro_dia = datetime(2023,1,1)
+        ultimo_dia = datetime(2023,12,31)
+
+        query = "SELECT * FROM Activities WHERE Date BETWEEN %s AND %s"
+        cursor.execute(query, (primeiro_dia, ultimo_dia))
+        data = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+
+        meses = [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11]
+        valores_meses ={}
+        for mes in meses:
+            result = 0
+            for row in data:
+                if row[1].month == mes+1:
+                    result += row[4].seconds
+
+            temp = {
+                "time": result
+            }
+            valores_meses[mes] = temp
+
+        temp = {
+            "Janeiro": valores_meses[0],
+            "Fevereiro": valores_meses[1],
+            "Março": valores_meses[2],
+            "Abril": valores_meses[3],
+            "Maio": valores_meses[4],
+            "Junho": valores_meses[5],
+            "Julho": valores_meses[6],
+            "Agosto": valores_meses[7],
+            "Setembro": valores_meses[8],
+            "Outubro": valores_meses[9],
+            "Novembro": valores_meses[10],
+            "Dezembro": valores_meses[11]
+        }
+        return temp, 200
+    except mysql.connector.Error as err:
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()
+
+@app.route('/changeAge', methods=['POST'])
+def changeAge():
+    try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "UPDATE Users SET Age = %s WHERE username = %s"
+        cursor.execute(query, (data['Age'], data['username']))
+        user = cursor.fetchone()
+
+        if cursor.rowcount > 0:
+            connection.commit()
+            return {'message': 'Age updated successfully'}, 201
+        else:
+            return {'error': 'User not found'}, 404
+        
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+    finally:
+        cursor.close()
+        connection.close()
+
+@app.route('/changeWeight', methods=['POST'])
+def changeWeight():
+    try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "UPDATE Users SET Weight = %s WHERE username = %s"
+        cursor.execute(query, (data['weight'], data['username']))
+        user = cursor.fetchone()
+
+        if cursor.rowcount > 0:
+            connection.commit()
+            return {'message': 'Weight updated successfully'}, 201
+        else:
+            return {'error': 'User not found'}, 404
+        
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+    finally:
+        cursor.close()
+        connection.close()       
+
+@app.route('/changeHeight', methods=['POST'])
+def changeHeight():
+    try:
+        data = request.get_json()
+        if not data:
+            return {'error': 'Body is empty.'}, 400
+
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "UPDATE Users SET Height = %s WHERE username = %s"
+        cursor.execute(query, (data['height'], data['username']))
+        user = cursor.fetchone()
+
+        if cursor.rowcount > 0:
+            connection.commit()
+            return {'message': 'Height updated successfully'}, 201
+        else:
+            return {'error': 'User not found'}, 404
+        
+
+    except mysql.connector.Error as err:
+        return {'error': str(err)}, 500
+    finally:
+        cursor.close()
+        connection.close()         
 
 if __name__ == '__main__':
     app.run(debug=True)
